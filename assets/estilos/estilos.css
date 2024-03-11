@@ -1,0 +1,325 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Satoshi;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    grid-template-rows: 70px 1fr 50px;
+    grid-template-areas: "zh  zh" "zn  zs" "zf  zf";
+}
+
+header {
+    grid-area: zh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4b3132;
+    color: aliceblue;
+    text-align: center;
+    font-family: Satoshi-Bold;
+    font-size: 30px;
+    z-index: 10;
+}
+
+header>h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+nav {
+    grid-area: zn;
+    background-color: #b56a65;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: Satoshi;
+    font-size: 15px;
+    position: fixed;
+    top: 70px;
+    left: 0px;
+    width: 230px;
+    height: 100%;
+}
+
+#relleno {
+    height: 25%;
+    width: 230px;
+    background-color: #b56a65;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+#titulo_nav {
+    margin: 30px 0 20px 0;
+    font-family: Satoshi-Bold;
+    z-index: 20;
+    color: black;
+    text-align: center;
+    font-size: 35px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#bombilla {
+    height: 25px;
+}
+
+nav .contenedor_temas {
+    background-color: black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    border-radius: 5px;
+    margin-top: 40px;
+    transition: font-size 0.5s, display 0.5s, border-color 0.5s, margin-right 0.5s, background-color 0.5s, color 0.5s, padding 0.5s;
+    cursor: pointer;
+    color: rgba(#fff, 0.8);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    height: 30px;
+    font-size: 17px;
+}
+
+nav>.contenedor_temas:hover {
+    background-color: #fff;
+    border-color: transparent;
+    color: #444;
+    font-weight: 650;
+    margin-right: 17px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+
+    .contador {
+        opacity: 1;
+        margin-right: 17px;
+        font-size: 12px;
+    }
+
+    .menos {
+        opacity: 1;
+        margin-left: 30px;
+    }
+}
+
+.tema {
+    padding-left: 20px;
+}
+
+.contador {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transition: margin-right 0.5s;
+    margin-top: 5px;
+
+}
+
+
+
+.menos {
+    font-size: 40px;
+    width: 17px;
+    position: absolute;
+    left: 155px;
+    transition: color 0.5s;
+    opacity: 0;
+    transition: opacity 0.3s ease, margin-left 0.5s;
+    margin-bottom: 8px;
+
+}
+
+.menos:hover {
+    animation: moveTrash 0.2s infinite alternate;
+}
+
+nav .contenedor_temas.seleccionado {
+    background-color: #fff;
+    border-color: transparent;
+    color: #444;
+    font-weight: 650;
+    margin-right: 17px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+nav .contenedor_temas.seleccionado .contador {
+    opacity: 1;
+}
+
+nav .contenedor_temas.seleccionado .menos {
+    opacity: 1;
+    margin-left: 24px;
+}
+
+section {
+    grid-area: zs;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url('../fotos/fondo_chat.png');
+
+}
+
+section>.gran_contenedor_mensaje {
+    width: 100%;
+    height: 130px;
+    background-color: #ddd;
+    margin: 15px 15px 0 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.cont_foto {
+    width: 100px;
+    flex: 0 0 auto;
+    margin-right: 10px;
+    text-align: center;
+    padding-left: 10px;
+}
+
+.foto_usuario {
+    width: 100%;
+    border-radius: 10px;
+    transition: scale 0.5s;
+
+}
+
+.foto_usuario:hover {
+    scale: 1.04;
+}
+
+.mensaje {
+    font-size: 30px;
+    flex: 1;
+    text-align: center;
+}
+
+.mensaje {
+    animation-duration: 1s;
+    animation-name: slidein;
+}
+
+.fecha_hora {
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    flex: 0 0 auto;
+    text-align: right;
+    margin-right: 10px;
+
+}
+
+footer {
+    grid-area: zf;
+    background-color: rgb(31, 30, 30);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    z-index: 9;
+}
+
+#boton-scroll {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    height: 70px;
+    cursor: pointer;
+    z-index: 15;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    animation: moveUpDown 0.5s infinite alternate;
+}
+
+.hide {
+    opacity: 0;
+}
+
+/* Flecha */
+@keyframes moveUpDown {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(10px);
+    }
+}
+
+/* Basura */
+@keyframes moveTrash {
+    0% {
+        transform: translateX(-1px);
+    }
+
+    100% {
+        transform: translateX(1px);
+    }
+}
+
+/* Responsive */
+@media screen and (min-width: 900px) {
+
+
+    section>.cont_foto {
+        width: 45%;
+    }
+
+    section>.cont_foto>img:hover {
+        scale: 1.08;
+    }
+
+}
+
+@media screen and (min-width: 1200px) {
+    #relleno {
+        width: 230px;
+    }
+
+    section>.cont_foto {
+        width: 30%;
+    }
+
+    */ section>.cont_foto {
+        padding: 16px 16px 0 16px;
+    }
+
+    section>.cont_foto>img:hover {
+        scale: 1.1;
+    }
+}
+
+
+
+@keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 300%;
+    }
+
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+@font-face {
+    font-family: Array;
+    src: url(../fuentes/Array-Bold.otf);
+}
+
+@font-face {
+    font-family: Satoshi;
+    src: url(../fuentes/Satoshi-Regular.otf);
+}
+
+@font-face {
+    font-family: Satoshi-Bold;
+    src: url(../fuentes/Satoshi-Bold.otf);
+}
