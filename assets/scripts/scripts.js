@@ -1,5 +1,5 @@
 
-var tema = ""
+
 function fCargarTemas() {
   // Pedir los temas a la base de datos
   const URL = 'assets/php/servidor.php?peticion=cargar_temas'
@@ -14,21 +14,21 @@ function fCargarTemas() {
         tema = data.datos[i].tema_tema;
         let id_tema = data.datos[i].tema_id;
         let cont = data.datos[i].contador;
-        html += `<div class="contenedor_temas" onclick="fMensajeTema(${id_tema})"><div class="tema">${tema}</div><div class="contador">(${cont})</div><div class="menos" title="Eliminar tema"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#e50606" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></div></div>`;
+        html += `<div class="contenedor_temas" onclick="fMensajeTema(${id_tema},'${tema}')"><div class="tema">${tema}</div><div class="contador">(${cont})</div><div class="menos" title="Eliminar tema"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#e50606" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></div></div>`;
 
       }
 
       document.querySelector("nav").innerHTML = html;
     })
 }
-function fMensajeTema(mensaje_id) {
+function fMensajeTema(mensaje_id,tema) {
   const URL = 'assets/php/servidor.php?peticion=MensajeTema&mensaje_id=' + mensaje_id;
   fetch(URL)
     .then((response) => response.json())
     .then((data) => {
       console.log(data)
-      let html;
-      html += `<div class="tema_mensaje">${tema}</div>`
+      let html = "";
+      html += `<div class="titulo_mensaje">${tema}</div>`
       for (i = 0; i < data.datos.length; i++) {
         let foto = data.datos[i].foto;
         let mensaje = data.datos[i].men_mensaje;
