@@ -1,4 +1,69 @@
 
+function fLogin(){
+  fMostrar("form_login");
+}
+
+function fMostrar(formulario){
+  // Ocultar todos los formularios
+  let todos = document.querySelectorAll("#div_modal > form");
+  console.log("Todos", todos);
+  for(i=0; i<todos.length; i++){
+      todos[i].style.display = "none";
+  }
+  // Mostrar el formulario que me piden
+  document.querySelector("#" + formulario).style.display = 'block';
+  // Mostrar la modal
+  document.querySelector("#div_modal").style.display = "flex";
+}
+
+function fCancelar(){
+  document.querySelector("#div_modal").style.display = "none";
+}
+
+function fControlLogin(){
+  // Leer el alias
+  let alias = document.querySelector("#alias").value;
+  // Leer el password
+  let password = document.querySelector("#password").value;
+  // Buscar el alias y el password en la BBDD
+  let login_correcto = false;
+  let URL = 'assets/php/servidor.php?peticion=ControlLogin';
+  URL += "&alias=" + alias;
+  URL += "&password=" + password;
+  fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+          console.log(data);
+
+          // Si es correcto
+          if (data.datos.length == 0){
+              document.querySelector("#div_error").innerHTML = "Acceso denegado";
+              return;
+          }  
+          //  El login es correcto
+          document.querySelector("#div_modal").style.display = "none"; 
+          login_correcto = true;               
+      })
+      .finally( function(){
+          if (login_correcto == true){
+              fCargarSecciones();
+          }
+      })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function fCargarTemas() {
   // Pedir los temas a la base de datos

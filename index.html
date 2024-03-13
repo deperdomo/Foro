@@ -9,9 +9,84 @@
 </head>
 <body onload="fCargarTemas()">
 
+    <div id="div_modal">
+        <form id="form_login">
+            <table>
+                <tr>
+                    <td>Alias</td>
+                    <td><input type="text" id="alias"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="password"></td>
+                </tr>
+                <tr>
+                    <td class="botonera">
+                        <div onclick="fControlLogin()">Login</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id="div_error">&nbsp;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" onclick="fMostrar('form_registro')">
+                        Registrar
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <form id="form_registro">
+            <table>
+                <tr>
+                    <td>Alias</td>
+                    <td><input type="text" id="ralias"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="rpassword"></td>
+                </tr>
+                <tr>
+                    <td>Repita password</td>
+                    <td><input type="password" id="rrpassword"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" id="remail"></td>
+                </tr>
+                <tr>
+                    <td>Foto</td>
+                    <td><input type="text" id="rfoto"></td>
+                </tr>
+                <tr>
+                    <td class="botonera">
+                        <div onclick="fControlRegistrar()">Registrar</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id="rdiv_error">&nbsp;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" onclick="fMostrar('form_login')">
+                        Login
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <form id="form_mensaje">
+            <div id="mensaje"></div>
+        </form>
+    </div>
+
+    
     <div id="relleno"></div>
     <header>
         <h1>Foro</h1>
+        <div id="login" onclick="fLogin()">Iniciar sesión</div>
+        <!-- <div id="registro" onclick="fRegistro()">Registro</div> -->
     </header>
 
 
