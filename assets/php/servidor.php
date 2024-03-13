@@ -28,18 +28,6 @@ if (isset($_REQUEST['peticion'])) {
             echo json_encode($datos);
             break;
 
-
-
-
-
-
-
-
-
-            
-
-
-
         case "CargarCategorias":
             //Preparo el  sql
             $sql = "SELECT c.cat_id,c.cat_nombre,count(f.foto_cat_id) AS contador from categorias c 
@@ -65,6 +53,35 @@ if (isset($_REQUEST['peticion'])) {
             echo json_encode($datos);
             break;
 
+
+
+        case "ControlLogin":
+            // Recuperar parametros
+            $alias = $_REQUEST['alias'];
+            $password = $_REQUEST['password'];
+            // Preparo el SQL   
+            $sql = "SELECT * FROM usuarios WHERE usu_alias = '$alias' AND usu_password=md5('$password')";
+            $datos['sql']=$sql;
+            // Ejecuto el SQL guardando el resultado
+            $datos['datos'] = BBDD_CTRLR::Consultas($sql);
+            // Devuelvo a JS los datos codificados como JSON
+            echo json_encode($datos);  
+            break; 
+
+        case "ControlRegistro":
+            $alias = $_REQUEST['alias'];
+            $password = $_REQUEST['password'];
+            $email = $_REQUEST['email'];
+            $foto = $_REQUEST['foto'];
+            $sql = "INSERT INTO usuarios VALUES ( null, '$alias', md5('$password'), '$email', '$foto' )";
+            $datos['sql']=$sql;
+            // CUIDADO : Este servidor utiliza la función CRUD para hacer Insert, Update o Delete
+            // CRUD tiene 2 parámetros, el SQL y una letra que si es i devuelve el ID generado; 
+            //  si no es i devuelve el nº de registros procesados
+            $datos['datos'] = BBDD_CTRLR::CRUD($sql, 'i');
+            // Devuelvo a JS los datos codificados como JSON
+            echo json_encode($datos);  
+            break;
     }        
         
 }

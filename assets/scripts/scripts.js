@@ -50,6 +50,47 @@ function fControlLogin(){
           }
       })
 }
+function fControlRegistrar(){
+  // Leer el alias
+  let alias = document.querySelector("#ralias").value;
+  // Leer el email
+  let email = document.querySelector("#remail").value;
+  // Leer el alias
+  let foto = document.querySelector("#rfoto").value;
+  // Leer el password
+  let password = document.querySelector("#rpassword").value;
+  let password2 = document.querySelector("#rrpassword").value;
+  // Comprobar los password
+  if (password != password2){
+      document.querySelector("#rdiv_error").innerHTML = "Los password no coinciden";
+      return;
+  }
+  // Buscar el alias y el password en la BBDD
+  let URL = 'assets/php/servidor.php?peticion=ControlRegistro';
+  URL += "&alias=" + alias;
+  URL += "&password=" + password;
+  URL += "&email=" + password;
+  URL += "&foto=" + password;
+  fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+          console.log("REGISTRO",data);  
+          if (data.datos == 0){
+              document.querySelector("#rdiv_error").innerHTML = "Inténtelo mas tarde";
+              return;
+          }
+          // Mostrar un mensaje
+          document.querySelector("#mensaje").innerHTML = "Registro correcto";
+          fMostrar("form_mensaje"); 
+          // Pasado x tiempo, mostrar el formulario de login
+          evento = setTimeout(fCerrarEvento, 2000);
+
+            
+      })
+}
+function fCerrarEvento(){
+  fMostrar("form_login"); 
+}
 
 
 
