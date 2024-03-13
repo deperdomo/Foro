@@ -34,8 +34,8 @@
                     <td colspan="2" onclick="fMostrar('form_registro')">
                         Registrar
                     </td>
-                    <td colspan="2" onclick="fCancelar('form_login')">
-                        salir
+                    <td colspan="2" class="button_salir" onclick="fCancelar('form_login')">
+                        Salir
                     </td>
                 </tr>
             </table>
@@ -76,7 +76,7 @@
                     <td colspan="2" onclick="fMostrar('form_login')">
                         Login
                     </td>
-                    <td colspan="2" onclick="fCancelar('form_login')">
+                    <td colspan="2" class="button_salir" onclick="fCancelar('form_login')">
                         salir
                     </td>
                 </tr>
@@ -91,8 +91,9 @@
     <div id="relleno"></div>
     <header>
         <h1>Foro</h1>
-        <div id="login" onclick="fLogin()">Iniciar sesión</div>
-        <!-- <div id="registro" onclick="fRegistro()">Registro</div> -->
+    
+        <button id="login" class="btn-hover color-7"  onclick="fLogin()">Inicia sesión</button>
+       
     </header>
 
 
