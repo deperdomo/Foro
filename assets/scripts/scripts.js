@@ -53,9 +53,9 @@ function fControlLogin(){
 function fControlRegistrar(){
   // Leer el alias
   let alias = document.querySelector("#ralias").value;
-  // Leer el email
-  let email = document.querySelector("#remail").value;
-  // Leer el alias
+  // Leer el nombre
+  let nombre = document.querySelector("#rnombre").value;
+  // Leer el foto
   let foto = document.querySelector("#rfoto").value;
   // Leer el password
   let password = document.querySelector("#rpassword").value;
@@ -69,14 +69,14 @@ function fControlRegistrar(){
   let URL = 'assets/php/servidor.php?peticion=ControlRegistro';
   URL += "&alias=" + alias;
   URL += "&password=" + password;
-  URL += "&email=" + password;
-  URL += "&foto=" + password;
+  URL += "&nombre=" + nombre;
+  URL += "&foto=" + foto;
   fetch(URL)
       .then((response) => response.json())
       .then((data) => {
           console.log("REGISTRO",data);  
           if (data.datos == 0){
-              document.querySelector("#rdiv_error").innerHTML = "Inténtelo mas tarde";
+              document.querySelector("#rdiv_error").innerHTML = "Inténtelo más tarde";
               return;
           }
           // Mostrar un mensaje

@@ -71,9 +71,10 @@ if (isset($_REQUEST['peticion'])) {
         case "ControlRegistro":
             $alias = $_REQUEST['alias'];
             $password = $_REQUEST['password'];
-            $email = $_REQUEST['email'];
             $foto = $_REQUEST['foto'];
-            $sql = "INSERT INTO usuarios VALUES ( null, '$alias', md5('$password'), '$email', '$foto' )";
+            $nombre = $_REQUEST['nombre'];
+            $sql = "INSERT INTO usuarios (usu_admin, usu_alias, usu_foto,usu_id, usu_nombre, usu_password) VALUES
+            ( 0, '$alias', '$foto', null, '$nombre', md5('$password'))";
             $datos['sql']=$sql;
             // CUIDADO : Este servidor utiliza la función CRUD para hacer Insert, Update o Delete
             // CRUD tiene 2 parámetros, el SQL y una letra que si es i devuelve el ID generado; 
