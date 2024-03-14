@@ -147,7 +147,7 @@ function fCargarTemas() {
         let cont = data.datos[i].contador;
 
       if(usuario_logeado == null ){
-          // Si se logea un usuario normal
+          // Si el usuario no se ha logeado
           html += `<div class="contenedor_temas" onclick="fMensajeTema(${id_tema},'${tema}')"><div class="tema">${tema}</div><div class="contador">(${cont})</div></div>`;
       } 
       if(usuario_logeado!= null && usuario_logeado.usu_admin==1){
@@ -170,13 +170,25 @@ function fMensajeTema(mensaje_id,tema) {
     .then((data) => {
       console.log(data)
       let html = "";
-      html += `<div class="titulo_mensaje">${tema}  <i id="añadir_mensaje" title="Añade un nuevo mensaje" class="fas fa-plus"></i></div>`
+      if(usuario_logeado == null ){
+        // Si el usuario no se ha logeado
+        html += `<div class="titulo_mensaje">${tema}</div>`      
+      } 
+      if(usuario_logeado!= null && usuario_logeado.usu_admin==1){
+        // Si se logea un administrador  
+        html += `<div class="titulo_mensaje">${tema}  <i id="añadir_mensaje" title="Añade un nuevo mensaje" class="fas fa-plus"></i></div>`      
+      }
+      if(usuario_logeado!= null && usuario_logeado.usu_admin==0){
+        // Si se logea un usuario normal
+        html += `<div class="titulo_mensaje">${tema}</div>`      
+      }
+     
       for (i = 0; i < data.datos.length; i++) {
         let foto = data.datos[i].foto;
         let mensaje = data.datos[i].men_mensaje;
         let fecha_hora = data.datos[i].men_fecha_hora;
         let nombre = data.datos[i].usu_nombre;
-
+        
 
         html += `<div class="gran_contenedor_mensaje">`
         html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`
@@ -214,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 
-
+ 
 
 
 
