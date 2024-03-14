@@ -65,7 +65,7 @@ function fControlLogin(){
           //   document.querySelectorAll(".menos").style.display = "flex"
 
           // }
-          fCancelar();
+          // fCancelar();
           fCargarTemas()
 
       })
@@ -176,7 +176,7 @@ function fMensajeTema(mensaje_id,tema) {
       } 
       if(usuario_logeado!= null && usuario_logeado.usu_admin==1){
         // Si se logea un administrador  
-        html += `<div class="titulo_mensaje">${tema}  <i id="añadir_mensaje" title="Añade un nuevo mensaje" class="fas fa-plus"></i></div>`      
+        html += `<div class="titulo_mensaje">${tema}&nbsp  <i id="añadir_mensaje" title="Añade un nuevo mensaje" class="fas fa-plus"></i></div>`      
       }
       if(usuario_logeado!= null && usuario_logeado.usu_admin==0){
         // Si se logea un usuario normal

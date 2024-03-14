@@ -302,14 +302,14 @@ section {
     margin-top: 10px;
     color: #1d3557;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    z-index: 2;
 }
 
 #añadir_mensaje{
     color: rgb(120, 226, 99);
     font-size: 40px;
     cursor: pointer;
-   
+    z-index: 2;
 
     
 }
@@ -322,6 +322,7 @@ section>.gran_contenedor_mensaje {
     display: flex;
     align-items: center;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 2;
 }
 
 .cont_foto {
@@ -330,6 +331,7 @@ section>.gran_contenedor_mensaje {
     margin-right: 10px;
     text-align: center;
     padding-left: 10px;
+    z-index: 7;
 }
 
 .foto_usuario {
@@ -341,7 +343,7 @@ section>.gran_contenedor_mensaje {
 }
 
 .foto_usuario:hover {
-    scale: 1.05;
+    scale: 1.08;
 }
 
 .mensaje {
