@@ -86,6 +86,32 @@
         <form id="form_mensaje">
             <div id="mensaje"></div>
         </form>
+        <form id="form_añadir_mensaje">
+            <table>
+                <th colspan="2">
+                    Escriba un nuevo mensaje
+                </th>
+                <tr>
+                    <td>mensaje</td>
+                    <td><textarea name="Nuevo mensaje" id="new_mensaje" cols="30" rows="20"></textarea></td>
+                </tr>
+                
+                <tr>
+                    <td colspan="2">
+                        <div id="div_error">&nbsp;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1" class="button_salir" onclick="fCancelar('form_login')">
+                        Salir
+                    </td>
+                    <td colspan="1" class="button_enviar_mensaje" onclick="fMostrar('form_registro')">
+                        Enviar
+                    </td>
+                    
+                </tr>
+            </table>
+        </form>
     </div>
 
     

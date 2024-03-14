@@ -28,31 +28,12 @@ if (isset($_REQUEST['peticion'])) {
             echo json_encode($datos);
             break;
 
-        case "CargarCategorias":
-            //Preparo el  sql
-            $sql = "SELECT c.cat_id,c.cat_nombre,count(f.foto_cat_id) AS contador from categorias c 
-            JOIN fotos f on f.foto_cat_id = c.cat_id
-            GROUP BY foto_cat_id
-            ORDER by c.cat_id";
-            $datos["sql"]= $sql;
-          //Ejecuto el SQL guardando el resultado
-            $datos["datos"] = BBDD_CTRLR::Consultas($sql);
-            // devuelvo a JS los datos codificados como JSON
-            echo json_encode($datos);      
-            break; 
 
-        case "FotoCategoria":
-            $id_foto = $_REQUEST['foto_id'];
-            $sql = "SELECT f.foto_foto FROM fotos f 
-			JOIN categorias c on f.foto_cat_id = c.cat_id
-            WHERE c.cat_id = $id_foto";
-            $datos['sql']=$sql;
-            // Ejecuto el SQL guardando el resultado
-            $datos['datos'] = BBDD_CTRLR::Consultas($sql);
-            // Devuelvo a JS los datos codificados como JSON
-            echo json_encode($datos);
-            break;
 
+
+
+
+            
 
 
         case "ControlLogin":

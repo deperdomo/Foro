@@ -5,6 +5,13 @@ let usuario_logeado = null;
 function fLogin(){
   fMostrar("form_login");
 }
+function fMostrarFormMensaje(){
+  document.querySelector("#form_añadir_mensaje").style.display = "flex";
+}
+function fMensaje(){
+  fMostrar("form_añadir_mensaje");
+}
+
 
 function fMostrar(formulario){
   // Ocultar todos los formularios
@@ -50,26 +57,13 @@ function fControlLogin(){
           login_correcto = true;               
       })
       .finally( function(){
-          // if (login_correcto == true){
-
-          //   for (i = 0; i < data.datos.length; i++) { 
-          //      id_admin = data.datos[i].usu_admin;
-          //   }
-
-          //   document.querySelector("#añadir_mensaje").style.display = "flex"
-          //   document.querySelector(".titulo_mensaje").style.cursor = "pointer"
-
-          //   document.querySelector("#bombilla").style.display = "block"
-          //   document.querySelector("#añadir_mensaje").style.display = "block"
-          //   document.querySelector(".menos").style.display = "block"
-          //   document.querySelectorAll(".menos").style.display = "flex"
-
-          // }
           // fCancelar();
           fCargarTemas()
 
       })
 }
+
+
 function fControlRegistrar(){
   // Leer el alias
   let alias = document.querySelector("#ralias").value;
@@ -174,9 +168,9 @@ function fMensajeTema(mensaje_id,tema) {
         // Si el usuario no se ha logeado
         html += `<div class="titulo_mensaje">${tema}</div>`      
       } 
-      if(usuario_logeado!= null && usuario_logeado.usu_admin==1){
+      if(usuario_logeado!= null && usuario_logeado.usu_admin==1){ 
         // Si se logea un administrador  
-        html += `<div class="titulo_mensaje">${tema}&nbsp  <i id="añadir_mensaje" title="Añade un nuevo mensaje" class="fas fa-plus"></i></div>`      
+        html += `<div class="titulo_mensaje">${tema}&nbsp  <i  onclick="fMensaje()" id="añadir_mensaje" title="Añade un nuevo mensaje" class="fas fa-plus"></i></div>`      
       }
       if(usuario_logeado!= null && usuario_logeado.usu_admin==0){
         // Si se logea un usuario normal
