@@ -18,8 +18,8 @@ if (isset($_REQUEST['peticion'])) {
         case "MensajeTema":
             $id_mensaje = $_REQUEST['mensaje_id'];
             $sql = "SELECT m.*,u.*,u.usu_foto as foto FROM mensajes m
-            JOIN temas t on t.tema_id = m.men_tema_id
-            JOIN usuarios u on m.men_usu_id = u.usu_id
+            left JOIN temas t on t.tema_id = m.men_tema_id
+            left JOIN usuarios u on m.men_usu_id = u.usu_id
             WHERE men_tema_id = $id_mensaje";
             $datos['sql']=$sql;
             // Ejecuto el SQL guardando el resultado
