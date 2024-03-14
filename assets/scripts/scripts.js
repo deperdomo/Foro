@@ -1,4 +1,7 @@
 
+// obtengo todos los datos del usuario en el momento de hacer el Login
+let usuario_logeado = null;
+
 function fLogin(){
   fMostrar("form_login");
 }
@@ -40,14 +43,31 @@ function fControlLogin(){
               document.querySelector("#div_error").innerHTML = "Acceso denegado";
               return;
           }  
+          usuario_logeado = data.datos[0];
+          console.log(usuario_logeado)
           //  El login es correcto
           document.querySelector("#div_modal").style.display = "none"; 
           login_correcto = true;               
       })
       .finally( function(){
-          if (login_correcto == true){
-              fCargarSecciones();
-          }
+          // if (login_correcto == true){
+
+          //   for (i = 0; i < data.datos.length; i++) { 
+          //      id_admin = data.datos[i].usu_admin;
+          //   }
+
+          //   document.querySelector("#añadir_mensaje").style.display = "flex"
+          //   document.querySelector(".titulo_mensaje").style.cursor = "pointer"
+
+          //   document.querySelector("#bombilla").style.display = "block"
+          //   document.querySelector("#añadir_mensaje").style.display = "block"
+          //   document.querySelector(".menos").style.display = "block"
+          //   document.querySelectorAll(".menos").style.display = "flex"
+
+          // }
+          fCancelar();
+          fCargarTemas()
+
       })
 }
 function fControlRegistrar(){
@@ -113,15 +133,31 @@ function fCargarTemas() {
     .then((response) => response.json())
     .then((data) => {
       console.log(data)
-
-      let html = `<h2 id="titulo_nav">Nuevo tema <svg id="bombilla" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#e5e811" d="M297.2 248.9C311.6 228.3 320 203.2 320 176c0-70.7-57.3-128-128-128S64 105.3 64 176c0 27.2 8.4 52.3 22.8 72.9c3.7 5.3 8.1 11.3 12.8 17.7l0 0c12.9 17.7 28.3 38.9 39.8 59.8c10.4 19 15.7 38.8 18.3 57.5H109c-2.2-12-5.9-23.7-11.8-34.5c-9.9-18-22.2-34.9-34.5-51.8l0 0 0 0c-5.2-7.1-10.4-14.2-15.4-21.4C27.6 247.9 16 213.3 16 176C16 78.8 94.8 0 192 0s176 78.8 176 176c0 37.3-11.6 71.9-31.4 100.3c-5 7.2-10.2 14.3-15.4 21.4l0 0 0 0c-12.3 16.8-24.6 33.7-34.5 51.8c-5.9 10.8-9.6 22.5-11.8 34.5H226.4c2.6-18.7 7.9-38.6 18.3-57.5c11.5-20.9 26.9-42.1 39.8-59.8l0 0 0 0 0 0c4.7-6.4 9-12.4 12.7-17.7zM192 128c-26.5 0-48 21.5-48 48c0 8.8-7.2 16-16 16s-16-7.2-16-16c0-44.2 35.8-80 80-80c8.8 0 16 7.2 16 16s-7.2 16-16 16zm0 384c-44.2 0-80-35.8-80-80V416H272v16c0 44.2-35.8 80-80 80z"/></svg></h2>`;
-
+      let html ="";
+      if(usuario_logeado!= null && usuario_logeado.usu_admin==1){
+        // Si se logea un administrador  
+        html += `<h2 id="titulo_nav">Nuevo tema <br> <i id="bombilla" class="fas fa-lightbulb"></i></h2>`;
+      }else{
+        // Si se logea un usuario normal 
+        html += `<h2 id="titulo_nav">Temas</h2>`;
+      }
       for (i = 0; i < data.datos.length; i++) {
         tema = data.datos[i].tema_tema;
         let id_tema = data.datos[i].tema_id;
         let cont = data.datos[i].contador;
-        html += `<div class="contenedor_temas" onclick="fMensajeTema(${id_tema},'${tema}')"><div class="tema">${tema}</div><div class="contador">(${cont})</div><div class="menos" title="Eliminar tema"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#e50606" d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></div></div>`;
 
+      if(usuario_logeado == null ){
+          // Si se logea un usuario normal
+          html += `<div class="contenedor_temas" onclick="fMensajeTema(${id_tema},'${tema}')"><div class="tema">${tema}</div><div class="contador">(${cont})</div></div>`;
+      } 
+      if(usuario_logeado!= null && usuario_logeado.usu_admin==1){
+        // Si se logea un administrador  
+        html += `<div class="contenedor_temas" onclick="fMensajeTema(${id_tema},'${tema}')"><div class="tema">${tema}</div><div class="contador">(${cont})</div><div class="menos" title="Eliminar tema"><i class="fas fa-trash"></i></div></div>`;
+      }
+      if(usuario_logeado!= null && usuario_logeado.usu_admin==0){
+        // Si se logea un usuario normal
+        html += `<div class="contenedor_temas" onclick="fMensajeTema(${id_tema},'${tema}')"><div class="tema">${tema}</div><div class="contador">(${cont})</div></div>`;
+      }
       }
 
       document.querySelector("nav").innerHTML = html;
@@ -134,7 +170,7 @@ function fMensajeTema(mensaje_id,tema) {
     .then((data) => {
       console.log(data)
       let html = "";
-      html += `<div class="titulo_mensaje">${tema}</div>`
+      html += `<div class="titulo_mensaje">${tema}  <i id="añadir_mensaje" title="Añade un nuevo mensaje" class="fas fa-plus"></i></div>`
       for (i = 0; i < data.datos.length; i++) {
         let foto = data.datos[i].foto;
         let mensaje = data.datos[i].men_mensaje;
@@ -154,76 +190,6 @@ function fMensajeTema(mensaje_id,tema) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function fCargarcategorias() {
-  let URL = 'assets/php/servidor.php?peticion=CargarCategorias';
-  fetch(URL)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      //recorrer lista
-      let html = "";
-      for (i = 0; i < data.datos.length; i++) {
-        let nombre = data.datos[i].cat_nombre;
-        let id = data.datos[i].cat_id;
-        let contador = data.datos[i].contador;
-        html += `<div onclick="fFotosCategorias(${id})">${nombre} (${contador})</div>`;
-      }
-      document.querySelector("nav").innerHTML = html;
-    })
-}
-
-function fFotosCategorias(foto_id) {
-  // Buscar las personas que tienen un hobbie
-  const URL = 'assets/php/servidor.php?peticion=FotoCategoria&foto_id=' + foto_id;
-  fetch(URL)
-    .then((response) => response.json())
-    .then((data) => {
-      // Imprimir los datos solicitados en la consola
-      console.log(data);
-      // Mostrarlos en el section
-      let html = "";
-      for (i = 0; i < data.datos.length; i++) {
-        let foto = data.datos[i].foto_foto;
-        html += `<div class="cont_foto"><img src="assets/Fotos/${foto}" class="foto_animal"></div>`
-      }
-      document.querySelector("section").innerHTML = html;
-    })
-}
 
 document.addEventListener('DOMContentLoaded', function () {
   var botonScroll = document.getElementById('boton-scroll');

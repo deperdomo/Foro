@@ -197,7 +197,9 @@ nav {
 }
 
 #bombilla {
-    height: 25px;
+    color: yellow;
+    cursor: pointer;
+    
 }
 
 nav .contenedor_temas {
@@ -212,7 +214,7 @@ nav .contenedor_temas {
     transition: font-size 0.5s, display 0.5s, border-color 0.5s, margin-right 0.5s, background-color 0.5s, color 0.5s, padding 0.5s;
     cursor: pointer;
     color: rgba(#fff, 0.8);
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.5);
     height: 30px;
     font-size: 17px;
 }
@@ -251,18 +253,15 @@ nav>.contenedor_temas:hover {
 
 }
 
-
-
 .menos {
-    font-size: 40px;
+    font-size: 24px;
     width: 17px;
+    color: red;
     position: absolute;
     left: 155px;
     transition: color 0.5s;
     opacity: 0;
-    transition: opacity 0.3s ease, margin-left 0.5s;
-    margin-bottom: 8px;
-
+    transition: opacity 0.3s ease, margin-left 0.5s; 
 }
 
 .menos:hover {
@@ -289,21 +288,32 @@ nav .contenedor_temas.seleccionado .menos {
 
 section {
     grid-area: zs;
-    /* background: #6066d2;  */
     background: #7eb1ff; 
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     height: 100%;
-
 }
 .titulo_mensaje{
     font-family: Satoshi-Bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
     font-size: 50px; 
     color: #1d3557;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
 
+#añadir_mensaje{
+    color: rgb(120, 226, 99);
+    font-size: 40px;
+    cursor: pointer;
+   
+
+    
 }
 section>.gran_contenedor_mensaje {
     width: 100%;
