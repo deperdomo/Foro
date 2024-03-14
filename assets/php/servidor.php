@@ -64,9 +64,34 @@ if (isset($_REQUEST['peticion'])) {
             // Devuelvo a JS los datos codificados como JSON
             echo json_encode($datos);  
             break;
-    }        
+
+
+        case "NuevoMensaje":
+                $mensaje = $_REQUEST['mensaje'];
+                $fechaYHoraInput = $_REQUEST['fechaYHoraInput'];
+                $usu_id = $_REQUEST['usu_id'];
+                $tema_id = $_REQUEST['tema_id'];
+
+                $sql = "INSERT INTO mensajes (men_fecha_hora, men_id, men_mensaje, men_tema_id, men_usu_id) VALUES
+                ('$fechaYHoraInput',null,'$mensaje',$tema_id,$usu_id)";
+
+                $datos['sql']=$sql;
+                // CUIDADO : Este servidor utiliza la función CRUD para hacer Insert, Update o Delete
+                // CRUD tiene 2 parámetros, el SQL y una letra que si es i devuelve el ID generado; 
+                //  si no es i devuelve el nº de registros procesados
+                $datos['datos'] = BBDD_CTRLR::CRUD($sql, 'i');
+                // Devuelvo a JS los datos codificados como JSON
+                echo json_encode($datos);  
+                break;
+
+
+
+
+
+    }             
+}   
         
-}
+
 
 // 'SELECT c.cat_id,c.cat_nombre,count(f.foto_cat_id) AS contador from categorias c 
 // JOIN fotos f on f.foto_cat_id = c.cat_id

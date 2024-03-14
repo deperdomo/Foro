@@ -1,6 +1,7 @@
 
 // obtengo todos los datos del usuario en el momento de hacer el Login
 let usuario_logeado = null;
+let tema_actual = null;
 
 function fLogin(){
   fMostrar("form_login");
@@ -11,7 +12,9 @@ function fMostrarFormMensaje(){
 function fMensaje(){
   fMostrar("form_añadir_mensaje");
 }
-
+function fCerrarEvento(){
+  fMostrar("form_login"); 
+}
 
 function fMostrar(formulario){
   // Ocultar todos los formularios
@@ -102,8 +105,44 @@ function fControlRegistrar(){
             
       })
 }
-function fCerrarEvento(){
-  fMostrar("form_login"); 
+
+
+function fNuevoMensaje(){
+  // Leer el Mensaje
+  let mensaje = document.querySelector("#rmensaje").value;
+  // Leer el fecha y hora 
+  // Obtener el elemento del input de fecha y hora
+var fechaYHoraInput = new Date().toISOString().slice(0, 19).replace("T", " ");  // Obtener la fecha y hora actuales
+  // var fechaHoraActual = new Date().toISOString().slice(0,16); // Formato ISO sin segundos
+  // Establecer el valor del input de fecha y hora
+  //fechaYHoraInput.value = fechaHoraActual;
+
+  // Leer el id del usuario 
+  let usu_id = usuario_logeado.usu_id
+  let tema_id = tema_actual;
+  // Buscar el alias y el password en la BBDD
+  let URL = 'assets/php/servidor.php?peticion=NuevoMensaje';
+  URL += "&mensaje=" + mensaje;
+  URL += "&fechaYHoraInput=" + fechaYHoraInput;
+  URL += "&usu_id=" + usu_id;
+  URL += "&tema_id=" + tema_id;
+
+  fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+          console.log("REGISTRO",data);  
+          if (data.datos == 0){
+              document.querySelector("#rdiv_error").innerHTML = "Inténtelo más tarde";
+              return;
+          }
+          // Mostrar un mensaje
+          document.querySelector("#mensaje").innerHTML = "Tema añadido correctamente";
+          fMostrar("form_mensaje"); 
+          // Pasado x tiempo, mostrar el formulario de login
+          evento = setTimeout(fCerrarEvento, 2000);
+
+            
+      })
 }
 
 
@@ -182,8 +221,7 @@ function fMensajeTema(mensaje_id,tema) {
         let mensaje = data.datos[i].men_mensaje;
         let fecha_hora = data.datos[i].men_fecha_hora;
         let nombre = data.datos[i].usu_nombre;
-        
-
+        tema_actual = data.datos[i].men_tema_id;       
         html += `<div class="gran_contenedor_mensaje">`
         html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`
         html += `<div class="mensaje">${mensaje}</div>`
@@ -197,6 +235,7 @@ function fMensajeTema(mensaje_id,tema) {
 
 
 
+// Flecha de scroll
 document.addEventListener('DOMContentLoaded', function () {
   var botonScroll = document.getElementById('boton-scroll');
 

@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="button_registrar" onclick="fMostrar('form_registro')">
-                        Registrar
+                        Registrate
                     </td>
                     <td colspan="2" class="button_salir" onclick="fCancelar('form_login')">
                         Salir
@@ -92,10 +92,13 @@
                     Escriba un nuevo mensaje
                 </th>
                 <tr>
-                    <td>mensaje</td>
-                    <td><textarea name="Nuevo mensaje" id="new_mensaje" cols="30" rows="20"></textarea></td>
+                    <td>Mensaje</td>
+                    <td><textarea name="Nuevo mensaje" id="rmensaje" cols="30" rows="20"></textarea></td>
                 </tr>
-                
+                <tr>
+                    <td>Fecha y hora</td>
+                    <td><input type="datetime-local" id="fecha_y_hora" name="fecha_y_hora"></td>
+                </tr>
                 <tr>
                     <td colspan="2">
                         <div id="div_error">&nbsp;</div>
@@ -105,7 +108,7 @@
                     <td colspan="1" class="button_salir" onclick="fCancelar('form_login')">
                         Salir
                     </td>
-                    <td colspan="1" class="button_enviar_mensaje" onclick="fMostrar('form_registro')">
+                    <td colspan="1" class="button_enviar_mensaje" onclick="fNuevoMensaje()">
                         Enviar
                     </td>
                     
