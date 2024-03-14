@@ -54,14 +54,42 @@ table{
 .button_salir:hover{
     background-color: var(--color-f);
     color: rgb(232, 106, 106);
-}  
-.botonera{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #555;
 }
+.button_registrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Satoshi-Bold;
+    width: 100px;
+    height: 40px;
+    border: 2px solid rgba(#fff, 0.6);
+    border-radius: 10px;
+    color: rgba(#fff, 0.8);
+    cursor: pointer;
+    transition: border-color 0.5s, background-color 0.5s, color 0.5s;  
+}  
+.button_registrar:hover{
+    background-color: var(--color-f);
+    color: rgb(147, 233, 98);
+}
+.button_login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Satoshi-Bold;
+    width: 90px;
+    height: 40px;
+    border: 2px solid rgba(#fff, 0.6);
+    border-radius: 10px;
+    color: rgba(#fff, 0.8);
+    cursor: pointer;
+    transition: border-color 0.5s, background-color 0.5s, color 0.5s;  
+}  
+.button_login:hover{
+    background-color: var(--color-f);
+    color: rgb(147, 233, 98);
+}
+
 #div_error{
     color: red;
     text-align: center;
@@ -472,7 +500,6 @@ footer {
     height: 80px;
     animation-delay: 0s;
 }
-
 
 .circles li:nth-child(2){
     left: 10%;
