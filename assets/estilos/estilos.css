@@ -375,6 +375,7 @@ section>.gran_contenedor_mensaje {
 .text_eliminar_mensaje {
     font-size: 30px;
     cursor: pointer;
+    color: var(--color-f);
     z-index: 2;
     padding-bottom: 110px;
     padding-right: 5px;
