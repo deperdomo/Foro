@@ -237,6 +237,25 @@ function fMensajeTema(mensaje_id,tema) {
     })
 }
 
+function fEliminarUnMensaje(id_mensaje){
+  // Pedir los temas a la base de datos
+const URL = 'assets/php/servidor.php?peticion=eliminar_un_mensaje&id_mensaje=' + id_mensaje;
+fetch(URL)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data)
+    // let html ="";
+   
+    // document.querySelector("nav").innerHTML = html;
+  })
+  .finally( function(){
+    // fCancelar();
+    fCargarTemas();
+    fMensajeTema(id_tema,tema);
+
+})
+}
+
 
 
 
