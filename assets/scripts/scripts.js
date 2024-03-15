@@ -3,6 +3,9 @@
 let usuario_logeado = null;
 let id_tema_actual = null;
 
+let tema = null;
+let id_tema = null;
+
 function fLogin(){
   fMostrar("form_login");
 }
@@ -133,11 +136,11 @@ var fechaYHoraInput = new Date().toISOString().slice(0, 19).replace("T", " ");  
               return;
           }
           // Mostrar un mensaje
-          document.querySelector("#mensaje").innerHTML = "Tema añadido correctamente";
+          document.querySelector("#mensaje").innerHTML = "Mensaje añadido correctamente";
           fMostrar("form_mensaje"); 
           // Pasado x tiempo, mostrar el formulario de login
-          evento = setTimeout(fCerrarEvento, 2000);
-
+          evento = setTimeout(fCancelar, 2000);
+          
             
       })
 }
@@ -173,7 +176,7 @@ function fCargarTemas() {
       }
       for (i = 0; i < data.datos.length; i++) {
         tema = data.datos[i].tema_tema;
-        let id_tema = data.datos[i].tema_id;
+        id_tema = data.datos[i].tema_id;
         let cont = data.datos[i].contador;
 
       if(usuario_logeado == null ){
@@ -222,6 +225,7 @@ function fMensajeTema(mensaje_id,tema) {
         html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`
         html += `<div class="mensaje">${mensaje}</div>`
         html += `<div class="fecha_hora">${fecha_hora}</div>`
+        html += `<div class="text_eliminar_mensaje" title="Eliminar" onclick="fEliminarUnMensaje(${data.datos[i].men_id})">x</div>`
         html += `</div>`
         id_tema_actual =id_tema;
       }
@@ -230,6 +234,24 @@ function fMensajeTema(mensaje_id,tema) {
     })
 }
 
+function fEliminarUnMensaje(id_mensaje){
+    // Pedir los temas a la base de datos
+  const URL = 'assets/php/servidor.php?peticion=eliminar_un_mensaje&id_mensaje=' + id_mensaje;
+  fetch(URL)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data)
+      // let html ="";
+     
+      // document.querySelector("nav").innerHTML = html;
+    })
+    .finally( function(){
+      // fCancelar();
+      fCargarTemas();
+      fMensajeTema(id_tema,tema);
+
+  })
+}
 
 
 

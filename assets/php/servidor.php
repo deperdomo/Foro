@@ -28,6 +28,16 @@ if (isset($_REQUEST['peticion'])) {
             echo json_encode($datos);
             break;
 
+        case "eliminar_un_mensaje":
+            $id_mensaje = $_REQUEST['id_mensaje'];
+            $sql = "DELETE FROM mensajes WHERE men_id = $id_mensaje";
+            $datos['sql']=$sql;
+            // Ejecuto el SQL guardando el resultado
+            $datos['datos'] = BBDD_CTRLR::CRUD($sql, '');
+            // Devuelvo a JS los registros modificados
+            echo json_encode($datos);
+            break;
+    
 
 
 
