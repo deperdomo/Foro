@@ -106,6 +106,17 @@ if (isset($_REQUEST['peticion'])) {
             echo json_encode($datos);  
             break;                
 
+        case "eliminar_un_tema":
+            $id_tema = $_REQUEST['id_tema'];  
+            $sql = "DELETE FROM temas WHERE tema_id = $id_tema";   
+            $datos['sql']=$sql;
+            // CUIDADO : Este servidor utiliza la función CRUD para hacer Insert, Update o Delete
+            // CRUD tiene 2 parámetros, el SQL y una letra que si es i devuelve el ID generado; 
+            //  si no es i devuelve el nº de registros procesados
+            $datos['datos'] = BBDD_CTRLR::CRUD($sql, '');
+            // Devuelvo a JS los datos codificados como JSON
+            echo json_encode($datos);  
+            break;                
 
 
     }             

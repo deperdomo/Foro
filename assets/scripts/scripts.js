@@ -188,7 +188,7 @@ function fCargarTemas() {
       } 
       if(usuario_logeado!= null && usuario_logeado.usu_admin==1){
         // Si se logea un administrador  
-        html += `<div class="contenedor_temas" onclick="fMensajeTema(${id_tema},'${tema}')"><div class="tema">${tema}</div><div class="contador">(${cont})</div><div class="menos" title="Eliminar tema"><i class="fas fa-trash"></i></div></div>`;
+        html += `<div class="contenedor_temas" onclick="fMensajeTema(${id_tema},'${tema}')"><div class="tema">${tema}</div><div class="contador">(${cont})</div><div class="menos" title="Eliminar tema"><i class="fas fa-trash" onclick="fEliminarUnTema(${id_tema})"></i></div></div>`;
       }
       if(usuario_logeado!= null && usuario_logeado.usu_admin==0){
         // Si se logea un usuario normal
@@ -256,6 +256,24 @@ fetch(URL)
 })
 }
 
+function fEliminarUnTema(id_tema){
+  // Pedir los temas a la base de datos
+const URL = 'assets/php/servidor.php?peticion=eliminar_un_tema&id_tema=' + id_tema;
+fetch(URL)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Tema eliminado: ",data)
+    // let html ="";
+   
+    // document.querySelector("nav").innerHTML = html;
+  })
+  .finally( function(){
+    // fCancelar();
+    fCargarTemas();
+    fMensajeTema(id_tema,tema);
+
+})
+}
 
 
 
