@@ -83,9 +83,11 @@
                 </tr>
             </table>
         </form>
+
         <form id="form_mensaje">
             <div id="mensaje"></div>
         </form>
+
         <form id="form_añadir_mensaje">
             <table>
                 <th colspan="2">
@@ -111,7 +113,30 @@
                     <td colspan="1" class="button_enviar_mensaje" onclick="fNuevoMensaje()">
                         Enviar
                     </td>
-                    
+                </tr>
+            </table>
+        </form>
+        <form id="form_añadir_tema">
+            <table>
+                <th colspan="2">
+                    Escriba el nombre del nuevo tema
+                </th>
+                <tr>
+                    <td>Nombre del tema</td>
+                    <td><input type="text" id="rnombreTema"></td></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id="div_error">&nbsp;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1" class="button_salir" onclick="fCancelar('form_login')">
+                        Salir
+                    </td>
+                    <td colspan="1" class="button_enviar_mensaje" onclick="fAñadirTema()">
+                        Confirmar
+                    </td>
                 </tr>
             </table>
         </form>

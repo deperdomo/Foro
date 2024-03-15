@@ -9,9 +9,11 @@ let id_tema = null;
 function fLogin(){
   fMostrar("form_login");
 }
-
 function fMensaje(){
   fMostrar("form_añadir_mensaje");
+}
+function fNuevoTema(){
+  fMostrar("form_añadir_tema");
 }
 function fCerrarEvento(){
   fMostrar("form_login"); 
@@ -65,6 +67,7 @@ function fControlLogin(){
       .finally( function(){
           // fCancelar();
           fCargarTemas()
+          fMensajeTema(id_tema,tema)
 
       })
 }
@@ -169,7 +172,7 @@ function fCargarTemas() {
       let html ="";
       if(usuario_logeado!= null && usuario_logeado.usu_admin==1){
         // Si se logea un administrador  
-        html += `<h2 id="titulo_nav">Nuevo tema <br> <i id="bombilla" class="fas fa-lightbulb"></i></h2>`;
+        html += `<h2 id="titulo_nav">Nuevo tema <br> <i id="bombilla" class="fas fa-lightbulb" onclick="fNuevoTema()" title="Crea un nuevo tema"></i></h2>`;
       }else{
         // Si se logea un usuario normal 
         html += `<h2 id="titulo_nav">Temas</h2>`;
@@ -234,24 +237,38 @@ function fMensajeTema(mensaje_id,tema) {
     })
 }
 
-function fEliminarUnMensaje(id_mensaje){
-    // Pedir los temas a la base de datos
-  const URL = 'assets/php/servidor.php?peticion=eliminar_un_mensaje&id_mensaje=' + id_mensaje;
-  fetch(URL)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data)
-      // let html ="";
-     
-      // document.querySelector("nav").innerHTML = html;
+
+
+
+function fAñadirTema(){
+    // Leer el nombre del Mensaje
+    let nombre_mensaje = document.querySelector("#rnombreTema").value;
+  
+    let URL = 'assets/php/servidor.php?peticion=crear_un_tema';
+  
+    URL += "&nombre_mensaje=" + nombre_mensaje;
+  
+  
+  
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        
     })
-    .finally( function(){
-      // fCancelar();
+      .finally( function(){
+      fCancelar();
       fCargarTemas();
       fMensajeTema(id_tema,tema);
 
   })
 }
+
+
+
+
+
+
 
 
 

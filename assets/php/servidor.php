@@ -94,7 +94,17 @@ if (isset($_REQUEST['peticion'])) {
                 echo json_encode($datos);  
                 break;
 
-
+        case "crear_un_tema":
+            $nombre_mensaje = $_REQUEST['nombre_mensaje'];  
+            $sql = "INSERT INTO temas VALUES(null,'$nombre_mensaje')";   
+            $datos['sql']=$sql;
+            // CUIDADO : Este servidor utiliza la función CRUD para hacer Insert, Update o Delete
+            // CRUD tiene 2 parámetros, el SQL y una letra que si es i devuelve el ID generado; 
+            //  si no es i devuelve el nº de registros procesados
+            $datos['datos'] = BBDD_CTRLR::CRUD($sql, 'i');
+            // Devuelvo a JS los datos codificados como JSON
+            echo json_encode($datos);  
+            break;                
 
 
 
