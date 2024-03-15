@@ -30,7 +30,7 @@ table{
 }
 #div_modal > form {
     background-color: #457b9d;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 5px;
     height: auto;
     padding: 10px;
@@ -80,6 +80,7 @@ table{
     width: 90px;
     height: 40px;
     border: 2px solid rgba(#fff, 0.6);
+    background-color: #ffffff6a;
     border-radius: 10px;
     color: rgba(#fff, 0.8);
     cursor: pointer;
@@ -91,10 +92,30 @@ table{
 }
 
 #div_error{
+    font-family: Satoshi-Bold;
     color: red;
     text-align: center;
     font-weight: 800;
 }
+#form_añadir_tema table{
+    width: 500px;
+}
+#td_nombreT{
+    width: 90px;
+}
+#rnombreTema{
+    display: flex;
+}
+.Titulo_de_Forms{
+    font-size: 50px;
+}
+.campo_imput{
+    text-align: right;
+}
+.td_login{
+    text-align: right;
+}
+
 body {
     height: 100vh;
     display: grid;

@@ -146,6 +146,12 @@ var fechaYHoraInput = new Date().toISOString().slice(0, 19).replace("T", " ");  
           
             
       })
+      .finally( function(){
+
+        fCargarTemas();
+        fMensajeTema(id_tema,tema);
+    
+    })
 }
 
 
@@ -217,7 +223,7 @@ function fMensajeTema(mensaje_id,tema) {
         // Si se logea un usuario normal
         html += `<div class="titulo_mensaje">${tema}</div>`      
       }
-     
+
       for (i = 0; i < data.datos.length; i++) {
         let foto = data.datos[i].foto;
         let mensaje = data.datos[i].men_mensaje;

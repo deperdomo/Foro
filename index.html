@@ -13,16 +13,24 @@
     <div id="div_modal">
         <form id="form_login">
             <table>
+                <th colspan="2" class="Titulo_de_Forms">
+                    Únete y participa
+                </th>
                 <tr>
-                    <td>Alias</td>
+                    <td colspan="2">
+                        <div>&nbsp;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="campo_imput">Alias:</td>
                     <td><input type="text" id="alias"></td>
                 </tr>
                 <tr>
-                    <td>Password</td>
+                    <td class="campo_imput">Password:</td>
                     <td><input type="password" id="password"></td>
                 </tr>
                 <tr>
-                    <td class="botonera">
+                    <td colspan="2" class="td_login">
                         <div onclick="fControlLogin()"  class="button_login" >Login</div>
                     </td>
                 </tr>
@@ -32,10 +40,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="button_registrar" onclick="fMostrar('form_registro')">
-                        Registrate
+                    <td class="button_registrar" onclick="fMostrar('form_registro')">
+                        No tengo cuenta
                     </td>
-                    <td colspan="2" class="button_salir" onclick="fCancelar('form_login')">
+                    <td class="button_salir" onclick="fCancelar('form_login')">
                         Salir
                     </td>
                 </tr>
@@ -43,24 +51,33 @@
         </form>
         <form id="form_registro">
             <table>
+                <th colspan="2" class="Titulo_de_Forms">
+                    ¡Vuelve a conectar <br>
+                    con la comunidad!
+                </th>
                 <tr>
-                    <td>Alias</td>
+                    <td colspan="2">
+                        <div>&nbsp;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="campo_imput">Alias:</td>
                     <td><input type="text" id="ralias"></td>
                 </tr>
                 <tr>
-                    <td>Password</td>
+                    <td class="campo_imput">Password:</td>
                     <td><input type="password" id="rpassword"></td>
                 </tr>
                 <tr>
-                    <td>Repita password</td>
+                    <td class="campo_imput">Repita password:</td>
                     <td><input type="password" id="rrpassword"></td>
                 </tr>
                 <tr>
-                    <td>Nombre</td>
+                    <td class="campo_imput">Nombre:</td>
                     <td><input type="text" id="rnombre"></td>
                 </tr>
                 <tr>
-                    <td>Foto</td>
+                    <td class="campo_imput">Foto:</td>
                     <td><input type="text" id="rfoto"></td>
                 </tr>
                 <tr>
@@ -74,10 +91,10 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" class="button_login" onclick="fMostrar('form_login')">
+                    <td class="button_login" onclick="fMostrar('form_login')">
                         Login
                     </td>
-                    <td colspan="2" class="button_salir" onclick="fCancelar('form_login')">
+                    <td class="button_salir" onclick="fCancelar('form_login')">
                         Salir
                     </td>
                 </tr>
@@ -122,13 +139,8 @@
                     Escriba el nombre del nuevo tema
                 </th>
                 <tr>
-                    <td>Nombre del tema</td>
+                    <td id="td_nombreT">Nombre del tema:</td>
                     <td><input type="text" id="rnombreTema"></td></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <div id="div_error">&nbsp;</div>
-                    </td>
                 </tr>
                 <tr>
                     <td colspan="1" class="button_salir" onclick="fCancelar('form_login')">
