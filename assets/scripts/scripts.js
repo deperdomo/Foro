@@ -34,13 +34,25 @@ function fMostrar(formulario){
 
 function fCancelar(){
   document.querySelector("#div_modal").style.display = "none";
+  document.querySelector("#div_error").innerHTML = "";
+  document.querySelector("#div_error_mensaje").innerHTML = "";
 }
 
 function fControlLogin(){
   // Leer el alias
   let alias = document.querySelector("#alias").value;
+   // Comprobando que el alias no este vacio
+  if (alias == ""){
+    document.querySelector("#div_error").innerHTML = "Escriba su Alias";
+    return;
+  }
   // Leer el password
   let password = document.querySelector("#password").value;
+   // Comprobando que el password no este vacio
+  if (password == ""){
+    document.querySelector("#div_error").innerHTML = "Escriba la Contraseña";
+    return;
+  }
   // Buscar el alias y el password en la BBDD
   let login_correcto = false;
   let URL = 'assets/php/servidor.php?peticion=ControlLogin';
@@ -53,7 +65,7 @@ function fControlLogin(){
 
           // Si es correcto
           if (data.datos.length == 0){
-              document.querySelector("#div_error").innerHTML = "Acceso denegado";
+              document.querySelector("#div_error").innerHTML = "Usuario no registrado";
               return;
           }
           usuario_logeado = data.datos[0];
@@ -76,10 +88,22 @@ function fControlLogin(){
 function fControlRegistrar(){
   // Leer el alias
   let alias = document.querySelector("#ralias").value;
+  if (alias == ""){
+    document.querySelector("#div_error").innerHTML = "Escriba su Alias";
+    return;
+  }
   // Leer el nombre
   let nombre = document.querySelector("#rnombre").value;
+  if (nombre == ""){
+    document.querySelector("#div_error").innerHTML = "Escriba su Nombre";
+    return;
+  }
   // Leer el foto
   let foto = document.querySelector("#rfoto").value;
+  if (foto == ""){
+    document.querySelector("#div_error").innerHTML = "Escriba una Foto";
+    return;
+  }
   // Leer el password
   let password = document.querySelector("#rpassword").value;
   let password2 = document.querySelector("#rrpassword").value;
@@ -117,7 +141,7 @@ function fNuevoMensaje(){
   // Leer el Mensaje
   let mensaje = document.querySelector("#rmensaje").value;
    // Comprobando que el mensaje no este vacio
-   if (mensaje == ""){
+  if (mensaje == ""){
     document.querySelector("#div_error_mensaje").innerHTML = "Escriba un mensaje";
     return;
   }
@@ -231,7 +255,25 @@ function fMensajeTema(id_tema,tema) {
         html += `<div class="titulo_mensaje">${tema}</div>`      
       }
 
-      for (i = 0; i < data.datos.length; i++) {
+      //                ---------- DIVS DE LOS MENSAJES ----------
+
+      if(usuario_logeado!= null && usuario_logeado.usu_admin==1){ 
+        // Si se logea un administrador  
+        for (i = 0; i < data.datos.length; i++) {
+          let foto = data.datos[i].foto;
+          let mensaje = data.datos[i].men_mensaje;
+          let fecha_hora = data.datos[i].men_fecha_hora;
+          let nombre = data.datos[i].usu_nombre;
+          id_tema = data.datos[i].men_tema_id;       
+          html += `<div class="gran_contenedor_mensaje">`
+          html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`
+          html += `<div class="mensaje">${mensaje}</div>`
+          html += `<div class="fecha_hora">${fecha_hora}</div>`
+          html += `<div class="text_eliminar_mensaje" title="Eliminar" onclick="fEliminarUnMensaje(${data.datos[i].men_id})">x</div>`
+          html += `</div>`
+        }      
+      }else{
+        for (i = 0; i < data.datos.length; i++) {
         let foto = data.datos[i].foto;
         let mensaje = data.datos[i].men_mensaje;
         let fecha_hora = data.datos[i].men_fecha_hora;
@@ -241,10 +283,10 @@ function fMensajeTema(id_tema,tema) {
         html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`
         html += `<div class="mensaje">${mensaje}</div>`
         html += `<div class="fecha_hora">${fecha_hora}</div>`
-        html += `<div class="text_eliminar_mensaje" title="Eliminar" onclick="fEliminarUnMensaje(${data.datos[i].men_id})">x</div>`
         html += `</div>`
-        
       }
+      }
+      
       console.log("ID del tema actual: ",id_tema_actual)
       document.querySelector("section").innerHTML = html;
     })
