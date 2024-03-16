@@ -116,6 +116,11 @@ function fControlRegistrar(){
 function fNuevoMensaje(){
   // Leer el Mensaje
   let mensaje = document.querySelector("#rmensaje").value;
+   // Comprobando que el mensaje no este vacio
+   if (mensaje == ""){
+    document.querySelector("#div_error_mensaje").innerHTML = "Escriba un mensaje";
+    return;
+  }
   // Leer el fecha y hora 
   // Obtener el elemento del input de fecha y hora
 var fechaYHoraInput = new Date().toISOString().slice(0, 19).replace("T", " ");  // Obtener la fecha y hora actuales
@@ -138,6 +143,7 @@ var fechaYHoraInput = new Date().toISOString().slice(0, 19).replace("T", " ");  
               document.querySelector("#rdiv_error").innerHTML = "Inténtelo más tarde";
               return;
           }
+          
           // Mostrar un mensaje
           document.querySelector("#mensaje").innerHTML = "Mensaje añadido correctamente";
           fMostrar("form_mensaje"); 
@@ -204,8 +210,9 @@ function fCargarTemas() {
       document.querySelector("nav").innerHTML = html;
     })
 }
-function fMensajeTema(mensaje_id,tema) {
-  const URL = 'assets/php/servidor.php?peticion=MensajeTema&mensaje_id=' + mensaje_id;
+function fMensajeTema(id_tema,tema) {
+  const URL = 'assets/php/servidor.php?peticion=MensajeTema&id_tema=' + id_tema;
+  id_tema_actual =id_tema;
   fetch(URL)
     .then((response) => response.json())
     .then((data) => {
@@ -236,7 +243,7 @@ function fMensajeTema(mensaje_id,tema) {
         html += `<div class="fecha_hora">${fecha_hora}</div>`
         html += `<div class="text_eliminar_mensaje" title="Eliminar" onclick="fEliminarUnMensaje(${data.datos[i].men_id})">x</div>`
         html += `</div>`
-        id_tema_actual =id_tema;
+        
       }
       console.log("ID del tema actual: ",id_tema_actual)
       document.querySelector("section").innerHTML = html;

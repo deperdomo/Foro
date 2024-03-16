@@ -91,7 +91,7 @@ table{
     color: rgb(147, 233, 98);
 }
 
-#div_error{
+#div_error,#div_error_mensaje{
     font-family: Satoshi-Bold;
     color: red;
     text-align: center;
@@ -108,6 +108,13 @@ table{
 }
 .Titulo_de_Forms{
     font-size: 50px;
+}
+.Titulo_de_Forms_mensajes{
+    font-size: 25px;
+}
+textarea {
+    height: 100px;
+    width: 200px; 
 }
 .campo_imput{
     text-align: right;

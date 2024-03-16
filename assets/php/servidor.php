@@ -16,11 +16,11 @@ if (isset($_REQUEST['peticion'])) {
             break; 
 
         case "MensajeTema":
-            $id_mensaje = $_REQUEST['mensaje_id'];
+            $id_tema = $_REQUEST['id_tema'];
             $sql = "SELECT m.*,u.*,u.usu_foto as foto FROM mensajes m
             left JOIN temas t on t.tema_id = m.men_tema_id
             left JOIN usuarios u on m.men_usu_id = u.usu_id
-            WHERE men_tema_id = $id_mensaje";
+            WHERE men_tema_id = $id_tema";
             $datos['sql']=$sql;
             // Ejecuto el SQL guardando el resultado
             $datos['datos'] = BBDD_CTRLR::Consultas($sql);

@@ -107,20 +107,21 @@
 
         <form id="form_añadir_mensaje">
             <table>
-                <th colspan="2">
+                <th colspan="2" class="Titulo_de_Forms_mensajes">
                     Escriba un nuevo mensaje
                 </th>
                 <tr>
-                    <td>Mensaje</td>
+                    <td colspan="2">
+                        <div>&nbsp;</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mensaje:</td>
                     <td><textarea name="Nuevo mensaje" id="rmensaje" cols="30" rows="20"></textarea></td>
                 </tr>
                 <tr>
-                    <td>Fecha y hora</td>
-                    <td><input type="datetime-local" id="fecha_y_hora" name="fecha_y_hora"></td>
-                </tr>
-                <tr>
                     <td colspan="2">
-                        <div id="div_error">&nbsp;</div>
+                        <div id="div_error_mensaje">&nbsp;</div>
                     </td>
                 </tr>
                 <tr>
