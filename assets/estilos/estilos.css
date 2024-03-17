@@ -180,7 +180,7 @@ header {
     -o-transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
-    color: white;
+    color: var(--color-t);
 }
 
 .btn-hover:focus {
@@ -401,6 +401,51 @@ section>.gran_contenedor_mensaje {
     margin-right: 10px;
 
 }
+/* ----------- VOTOS -----------*/
+.div_num_votos{
+    font-family: Satoshi-Bold;
+    font-size: 17px;
+    background-color: var(--color-t);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    right: 10px;
+    top: 45px;
+    height: 15px;
+    width: 20px;
+    
+}
+.div_like{
+    /* background-color: #78fa07; */
+    color: #5ab50a;
+    position: relative;
+    right: 15px;
+    top: 45px;
+    height: 17px;
+    width: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+.div_dislike{
+    /* background-color: #fa2307; */
+    color:  #fa2307;
+    position: relative;
+    right: 20px;
+    top: 45px;
+    height: 17px;
+    width: 20px;
+    padding-left: 5px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+
+
+
+
+
+
 .text_eliminar_mensaje {
     font-size: 30px;
     cursor: pointer;

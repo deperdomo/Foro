@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-03-2024 a las 21:35:31
+-- Tiempo de generación: 18-03-2024 a las 00:14:12
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,18 +42,15 @@ CREATE TABLE `mensajes` (
 INSERT INTO `mensajes` (`men_id`, `men_mensaje`, `men_tema_id`, `men_usu_id`, `men_fecha_hora`) VALUES
 (1, 'Adornar la web', 2, 1, '2024-01-09 17:59:27'),
 (2, 'Si no lo pillas, es cuestión de práctica', 2, 2, '2024-01-09 17:59:27'),
-(3, 'Prueba', 2, 1, '2024-01-09 18:23:15'),
-(5, 'Esto es un mensaje de prueba', 2, 2, '2024-03-14 11:30:00'),
-(6, 'dssd s', 2, 10, '2024-03-14 18:34:34'),
-(7, 'sssss', 2, 10, '2024-03-14 18:36:39'),
-(8, 'ercve', 2, 10, '2024-03-14 18:45:09'),
-(9, 'ecwc', 2, 10, '2024-03-14 18:46:48'),
-(10, 'efwcv', 2, 10, '2024-03-14 18:48:56'),
-(11, 'Este es un mensaje de Oracle', 7, 10, '2024-03-14 20:24:39'),
-(12, 'Este es un mensaje de HTML', 1, 10, '2024-03-14 20:24:39'),
-(13, 'Este es un mensaje de JavaScript', 3, 11, '2024-03-14 20:26:59'),
-(14, 'Este es un mensaje de PHP', 4, 11, '2024-03-14 20:26:59'),
-(15, 'Este es un mensaje de Java', 5, 10, '2024-03-14 20:26:59');
+(10, 'evvrv', 2, 1, '2024-03-16 15:39:51'),
+(11, 'evvrv', 2, 1, '2024-03-16 15:39:56'),
+(19, 'wecwecwc', 5, 1, '2024-03-16 16:19:23'),
+(23, 'wedwcw', 13, 1, '2024-03-16 16:35:10'),
+(24, 'wedwcw', 13, 1, '2024-03-16 16:35:22'),
+(26, 'tyeyg', 12, 1, '2024-03-16 16:41:24'),
+(27, 'tyeyg', 7, 1, '2024-03-16 16:41:41'),
+(29, 'ERAQWEC', 4, 1, '2024-03-16 18:26:29'),
+(30, 'ERTRTV', 5, 1, '2024-03-16 18:26:54');
 
 -- --------------------------------------------------------
 
@@ -71,12 +68,12 @@ CREATE TABLE `temas` (
 --
 
 INSERT INTO `temas` (`tema_id`, `tema_tema`) VALUES
-(1, 'HTML'),
 (2, 'CSS'),
-(3, 'Javascript'),
 (4, 'PHP'),
 (5, 'Java'),
-(7, 'Oracle');
+(7, 'Oracle'),
+(12, 'Primer Tema'),
+(13, 'Segundo Tema');
 
 -- --------------------------------------------------------
 
@@ -103,10 +100,30 @@ INSERT INTO `usuarios` (`usu_id`, `usu_nombre`, `usu_alias`, `usu_password`, `us
 (3, 'Pepe', 'pepe', '926e27eecdbc7a18858b3798ba99bddd', 'anonimo.png', 0),
 (7, 'Pepe2', 'pepe2', '926e27eecdbc7a18858b3798ba99bddd', 'anonimo.png', 0),
 (8, 'Juana', 'juana', 'a94652aa97c7211ba8954dd15a3cf838', 'u03.gif', 0),
-(9, 'prueba', 'prueba', 'c893bad68927b457dbed39460e6afd62', 'u05.gif', 0),
-(10, 'x', 'x', '9dd4e461268c8034f5c8564e155c67a6', 'u06.gif', 1),
-(11, 'Deivi', 'Deivi', '83878c91171338902e0fe0fb97a8c47a', 'u15.gif', 1),
-(19, 'p', 'p', '83878c91171338902e0fe0fb97a8c47a', 'p', 0);
+(9, '', '', 'd41d8cd98f00b204e9800998ecf8427e', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `votos`
+--
+
+CREATE TABLE `votos` (
+  `voto_id` int(11) NOT NULL,
+  `usu_id` int(11) NOT NULL,
+  `men_id` int(11) NOT NULL,
+  `voto_positivo` tinyint(1) DEFAULT NULL,
+  `voto_negativo` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `votos`
+--
+
+INSERT INTO `votos` (`voto_id`, `usu_id`, `men_id`, `voto_positivo`, `voto_negativo`) VALUES
+(1, 1, 2, 1, 0),
+(2, 1, 1, 0, 1),
+(3, 1, 2, 1, NULL);
 
 --
 -- Índices para tablas volcadas
@@ -134,6 +151,14 @@ ALTER TABLE `usuarios`
   ADD UNIQUE KEY `usu_alias` (`usu_alias`);
 
 --
+-- Indices de la tabla `votos`
+--
+ALTER TABLE `votos`
+  ADD PRIMARY KEY (`voto_id`),
+  ADD KEY `usu_id` (`usu_id`),
+  ADD KEY `men_id` (`men_id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -141,19 +166,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `men_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `men_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `temas`
 --
 ALTER TABLE `temas`
-  MODIFY `tema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `tema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `usu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `usu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas
@@ -163,8 +188,16 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
+  ADD CONSTRAINT `fk_tema_mensajes` FOREIGN KEY (`men_tema_id`) REFERENCES `temas` (`tema_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `mensajes_ibfk_1` FOREIGN KEY (`men_usu_id`) REFERENCES `usuarios` (`usu_id`),
   ADD CONSTRAINT `mensajes_ibfk_2` FOREIGN KEY (`men_tema_id`) REFERENCES `temas` (`tema_id`);
+
+--
+-- Filtros para la tabla `votos`
+--
+ALTER TABLE `votos`
+  ADD CONSTRAINT `votos_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `usuarios` (`usu_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `votos_ibfk_2` FOREIGN KEY (`men_id`) REFERENCES `mensajes` (`men_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

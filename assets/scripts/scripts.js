@@ -278,12 +278,20 @@ function fMensajeTema(id_tema,tema) {
         let mensaje = data.datos[i].men_mensaje;
         let fecha_hora = data.datos[i].men_fecha_hora;
         let nombre = data.datos[i].usu_nombre;
-        id_tema = data.datos[i].men_tema_id;       
+        id_tema = data.datos[i].men_tema_id; 
+
+        let id_mensaje = data.datos[i].men_id;     
+
         html += `<div class="gran_contenedor_mensaje">`
         html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`
         html += `<div class="mensaje">${mensaje}</div>`
         html += `<div class="fecha_hora">${fecha_hora}</div>`
+        html += `<div class="div_like"><i class="fas fa-thumbs-up"></i></div>`
+        html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180"></i></div>`
+        html += `<div class="div_num_votos"><div id="mensaje${id_mensaje}"></div></div>`
+        
         html += `</div>`
+        fCargarVotos(id_mensaje);
       }
       }
       
@@ -292,6 +300,26 @@ function fMensajeTema(id_tema,tema) {
     })
 }
 
+function fCargarVotos(id_mensaje){
+    // Pedir los temas a la base de datos
+    const URL = 'assets/php/servidor.php?peticion=Cargar_Votos&id_mensaje='+id_mensaje;
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("CargarVotos: ",data)
+        if(data.datos.length == 0){
+          console.log("Array vacio")
+        }else{
+          let html ="";
+        let positivos = data.datos[0].votos_positivos;
+        let negativos = data.datos[0].votos_negativos;
+        let total = positivos - negativos;
+        html = total;
+        document.querySelector(`#mensaje${id_mensaje}`).innerHTML = html;
+        }
+        
+      })
+}
 function fEliminarUnMensaje(id_mensaje){
   // Pedir los temas a la base de datos
 const URL = 'assets/php/servidor.php?peticion=eliminar_un_mensaje&id_mensaje=' + id_mensaje;

@@ -38,13 +38,16 @@ if (isset($_REQUEST['peticion'])) {
             echo json_encode($datos);
             break;
     
-
-
-
-
-
-            
-
+        case "Cargar_Votos":
+            $id_mensaje = $_REQUEST['id_mensaje'];
+            $sql = "SELECT IFNULL(COUNT(voto_positivo), 0) as votos_positivos, IFNULL(COUNT(voto_negativo), 0) as votos_negativos  FROM votos
+            WHERE men_id = $id_mensaje
+            GROUP BY men_id";
+            $datos['sql']=$sql;
+            $datos["datos"] = BBDD_CTRLR::Consultas($sql);
+            echo json_encode($datos);      
+            break; 
+    
 
         case "ControlLogin":
             // Recuperar parametros
