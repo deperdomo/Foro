@@ -14,8 +14,14 @@
         <form id="form_login">
             <table>
                 <th colspan="2" class="Titulo_de_Forms">
-                    Únete y participa
+                    ¡Vuelve a conectar <br>
+                    con la comunidad!
                 </th>
+                <tr>
+                    <td colspan="2">
+                        <div><hr color="black"></div>
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="2">
                         <div>&nbsp;</div>
@@ -31,7 +37,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="td_login">
-                        <div onclick="fControlLogin()"  class="button_login" >Login</div>
+                        <div onclick="fControlLogin()"  class="button_loginx" >Login</div>
                     </td>
                 </tr>
                 <tr>
@@ -41,7 +47,7 @@
                 </tr>
                 <tr>
                     <td class="button_registrar" onclick="fMostrar('form_registro')">
-                        Registrarme
+                        No tengo cuenta
                     </td>
                     <td class="button_salir" onclick="fCancelar('form_login')">
                         Salir
@@ -52,37 +58,41 @@
         <form id="form_registro">
             <table>
                 <th colspan="2" class="Titulo_de_Forms">
-                    ¡Vuelve a conectar <br>
-                    con la comunidad!
+                    Únete y participa
                 </th>
+                <tr>
+                    <td colspan="2">
+                        <div><hr color="black"></div>
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="2">
                         <div>&nbsp;</div>
                     </td>
                 </tr>
                 <tr>
-                    <td class="campo_imput">Alias:</td>
-                    <td><input type="text" id="ralias"></td>
-                </tr>
-                <tr>
-                    <td class="campo_imput">Password:</td>
-                    <td><input type="password" id="rpassword"></td>
-                </tr>
-                <tr>
-                    <td class="campo_imput">Repita password:</td>
-                    <td><input type="password" id="rrpassword"></td>
-                </tr>
-                <tr>
                     <td class="campo_imput">Nombre:</td>
                     <td><input type="text" id="rnombre"></td>
+                </tr>
+                <tr>
+                    <td class="campo_imput">Alias:</td>
+                    <td><input type="text" id="ralias"></td>
                 </tr>
                 <tr>
                     <td class="campo_imput">Foto:</td>
                     <td><input type="text" id="rfoto"></td>
                 </tr>
                 <tr>
+                    <td class="campo_imput">Contraseña:</td>
+                    <td><input type="password" id="rpassword"></td>
+                </tr>
+                <tr>
+                    <td class="campo_imput">Repita la contraseña:</td>
+                    <td><input type="password" id="rrpassword"></td>
+                </tr>
+                <tr>
                     <td class="botonera">
-                        <div onclick="fControlRegistrar()" class="button_registrar">Registrar</div>
+                        <div onclick="fControlRegistrar()" class="button_registrarx">Registrar</div>
                     </td>
                 </tr>
                 <tr>
@@ -110,6 +120,11 @@
                 <th colspan="2" class="Titulo_de_Forms_mensajes">
                     Escriba un nuevo mensaje
                 </th>
+                <tr>
+                    <td colspan="2">
+                        <div><hr color="black"></div>
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="2">
                         <div>&nbsp;</div>

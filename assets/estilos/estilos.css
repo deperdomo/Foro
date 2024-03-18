@@ -80,18 +80,30 @@ table{
     width: 90px;
     height: 40px;
     border: 2px solid rgba(#fff, 0.6);
-    background-color: #ffffff6a;
     border-radius: 10px;
     color: rgba(#fff, 0.8);
     cursor: pointer;
     transition: border-color 0.5s, background-color 0.5s, color 0.5s;  
 }  
-.button_login:hover{
+.button_login:hover,.button_registrarx:hover,.button_loginx:hover{
     background-color: var(--color-f);
     color: rgb(147, 233, 98);
 }
-
-#div_error,#div_error_mensaje{
+.button_registrarx,.button_loginx{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Satoshi-Bold;
+    width: 90px;
+    height: 40px;
+    border: 2px solid rgba(#fff, 0.6);
+    background-color: #ffffff6a;
+    border-radius: 10px;
+    color: rgba(#fff, 0.8);
+    cursor: pointer;
+    transition: border-color 0.5s, background-color 0.5s, color 0.5s;  
+}
+#div_error,#div_error_mensaje,#rdiv_error{
     font-family: Satoshi-Bold;
     color:#bc202f;
     font-size: 19px;
@@ -150,6 +162,7 @@ header {
     left: 20px;
     top: 8px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
 }
 #login{
     text-align: center;

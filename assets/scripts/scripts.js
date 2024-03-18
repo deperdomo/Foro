@@ -35,6 +35,7 @@ function fMostrar(formulario){
 function fCancelar(){
   document.querySelector("#div_modal").style.display = "none";
   document.querySelector("#div_error").innerHTML = "";
+  document.querySelector("#rdiv_error").innerHTML = "";
   document.querySelector("#div_error_mensaje").innerHTML = "";
 }
 
@@ -86,27 +87,31 @@ function fControlLogin(){
 
 
 function fControlRegistrar(){
-  // Leer el alias
-  let alias = document.querySelector("#ralias").value;
-  if (alias == ""){
-    document.querySelector("#div_error").innerHTML = "Escriba su Alias";
-    return;
-  }
   // Leer el nombre
   let nombre = document.querySelector("#rnombre").value;
   if (nombre == ""){
-    document.querySelector("#div_error").innerHTML = "Escriba su Nombre";
+    document.querySelector("#rdiv_error").innerHTML = "Escriba su Nombre";
+    return;
+  }
+  // Leer el alias
+  let alias = document.querySelector("#ralias").value;
+  if (alias == ""){
+    document.querySelector("#rdiv_error").innerHTML = "Escriba su Alias";
     return;
   }
   // Leer el foto
   let foto = document.querySelector("#rfoto").value;
   if (foto == ""){
-    document.querySelector("#div_error").innerHTML = "Escriba una Foto";
+    document.querySelector("#rdiv_error").innerHTML = "Escriba una Foto";
     return;
   }
   // Leer el password
   let password = document.querySelector("#rpassword").value;
   let password2 = document.querySelector("#rrpassword").value;
+  if (password == ""){
+    document.querySelector("#rdiv_error").innerHTML = "Escriba su Contraseña";
+    return;
+  }
   // Comprobar los password
   if (password != password2){
       document.querySelector("#rdiv_error").innerHTML = "Los password no coinciden";
@@ -291,15 +296,15 @@ function fMensajeTema(id_tema,tema) {
           
           let id_mensaje = data.datos[i].men_id; 
 
-          html += `<div class="gran_contenedor_mensaje">`
-          html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`
-          html += `<div class="mensaje">${mensaje}</div>`
-          html += `<div class="fecha_hora">${fecha_hora}</div>`
-          html += `<div class="text_eliminar_mensaje" title="Eliminar" onclick="fEliminarUnMensaje(${data.datos[i].men_id})">x</div>`
-          html += `<div class="div_like"><i class="fas fa-thumbs-up" onclick="fLike(${data.datos[i].men_id})"></i></div>`
-          html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180" onclick="fDislike(${data.datos[i].men_id})"></i></div>`
-          html += `<div class="div_num_votos"><div id="mensaje${id_mensaje}">0</div></div>`
-          html += `</div>`
+          html += `<div class="gran_contenedor_mensaje">`;
+          html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`;
+          html += `<div class="mensaje">${mensaje}</div>`;
+          html += `<div class="fecha_hora">${fecha_hora}</div>`;
+          html += `<div class="text_eliminar_mensaje" title="Eliminar" onclick="fEliminarUnMensaje(${data.datos[i].men_id})">x</div>`;
+          html += `<div class="div_like"><i class="fas fa-thumbs-up" onclick="fLike(${data.datos[i].men_id})"></i></div>`;
+          html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180" onclick="fDislike(${data.datos[i].men_id})"></i></div>`;
+          html += `<div class="div_num_votos"><div id="mensaje${id_mensaje}">0</div></div>`;
+          html += `</div>`;
           fCargarVotos(id_mensaje);
         }      
       }
