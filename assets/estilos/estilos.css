@@ -447,6 +447,9 @@ section>.gran_contenedor_mensaje {
 
 
 .text_eliminar_mensaje {
+    position: relative;
+    left: 63px;
+    top: 3px;
     font-size: 30px;
     cursor: pointer;
     color: var(--color-f);

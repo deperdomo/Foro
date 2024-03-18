@@ -246,33 +246,62 @@ function fMensajeTema(id_tema,tema) {
         // Si el usuario no se ha logeado
         html += `<div class="titulo_mensaje">${tema}</div>`      
       } 
-      if(usuario_logeado!= null && usuario_logeado.usu_admin==1){ 
+      if(usuario_logeado!= null && (usuario_logeado.usu_admin==1 || usuario_logeado.usu_admin==0)){ 
         // Si se logea un administrador  
         html += `<div class="titulo_mensaje">${tema}&nbsp  <i  onclick="fMensaje()" id="añadir_mensaje" title="Añade un nuevo mensaje" class="fas fa-plus"></i></div>`      
       }
-      if(usuario_logeado!= null && usuario_logeado.usu_admin==0){
-        // Si se logea un usuario normal
-        html += `<div class="titulo_mensaje">${tema}</div>`      
-      }
+      
 
       //                ---------- DIVS DE LOS MENSAJES ----------
+      if(usuario_logeado!= null && usuario_logeado.usu_admin==0 ){
+        // Si se logea un usuario  
+        for (i = 0; i < data.datos.length; i++) {
+          let foto = data.datos[i].foto;
+          let mensaje = data.datos[i].men_mensaje;
+          let fecha_hora = data.datos[i].men_fecha_hora;
+          let nombre = data.datos[i].usu_nombre;
+          id_tema = data.datos[i].men_tema_id; 
+          let men_usu_id = data.datos[i].men_usu_id; 
+          let id_mensaje = data.datos[i].men_id; 
 
-      if(usuario_logeado!= null && usuario_logeado.usu_admin==1){ 
+          html += `<div class="gran_contenedor_mensaje">`
+          html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`
+          html += `<div class="mensaje">${mensaje}</div>`
+          html += `<div class="fecha_hora">${fecha_hora}</div>`
+          if(men_usu_id == usuario_logeado.usu_id){
+              html += `<div class="text_eliminar_mensaje" title="Eliminar" onclick="fEliminarUnMensaje(${data.datos[i].men_id})">x</div>`
+          }
+          html += `<div class="div_like"><i class="fas fa-thumbs-up"></i></div>`
+          html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180"></i></div>`
+          html += `<div class="div_num_votos"><div id="mensaje${id_mensaje}"></div></div>`
+          html += `</div>`
+      }
+      
+
+    }
+      if(usuario_logeado!= null && usuario_logeado.usu_admin==1 ){ 
         // Si se logea un administrador  
         for (i = 0; i < data.datos.length; i++) {
           let foto = data.datos[i].foto;
           let mensaje = data.datos[i].men_mensaje;
           let fecha_hora = data.datos[i].men_fecha_hora;
           let nombre = data.datos[i].usu_nombre;
-          id_tema = data.datos[i].men_tema_id;       
+          id_tema = data.datos[i].men_tema_id; 
+          
+          let id_mensaje = data.datos[i].men_id; 
+
           html += `<div class="gran_contenedor_mensaje">`
           html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`
           html += `<div class="mensaje">${mensaje}</div>`
           html += `<div class="fecha_hora">${fecha_hora}</div>`
           html += `<div class="text_eliminar_mensaje" title="Eliminar" onclick="fEliminarUnMensaje(${data.datos[i].men_id})">x</div>`
+          html += `<div class="div_like"><i class="fas fa-thumbs-up"></i></div>`
+          html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180"></i></div>`
+          html += `<div class="div_num_votos"><div id="mensaje${id_mensaje}"></div></div>`
           html += `</div>`
         }      
-      }else{
+      }
+      if(usuario_logeado== null){
         for (i = 0; i < data.datos.length; i++) {
         let foto = data.datos[i].foto;
         let mensaje = data.datos[i].men_mensaje;
