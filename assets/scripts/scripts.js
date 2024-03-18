@@ -271,10 +271,11 @@ function fMensajeTema(id_tema,tema) {
           if(men_usu_id == usuario_logeado.usu_id){
               html += `<div class="text_eliminar_mensaje" title="Eliminar" onclick="fEliminarUnMensaje(${data.datos[i].men_id})">x</div>`
           }
-          html += `<div class="div_like"><i class="fas fa-thumbs-up"></i></div>`
-          html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180"></i></div>`
-          html += `<div class="div_num_votos"><div id="mensaje${id_mensaje}"></div></div>`
+          html += `<div class="div_like"><i class="fas fa-thumbs-up" onclick="fLike(${data.datos[i].men_id})"></i></div>`
+          html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180" onclick="fDislike(${data.datos[i].men_id})"></i></div>`
+          html += `<div class="div_num_votos"><div id="mensaje${id_mensaje}">0</div></div>`
           html += `</div>`
+          fCargarVotos(id_mensaje);
       }
       
 
@@ -295,10 +296,11 @@ function fMensajeTema(id_tema,tema) {
           html += `<div class="mensaje">${mensaje}</div>`
           html += `<div class="fecha_hora">${fecha_hora}</div>`
           html += `<div class="text_eliminar_mensaje" title="Eliminar" onclick="fEliminarUnMensaje(${data.datos[i].men_id})">x</div>`
-          html += `<div class="div_like"><i class="fas fa-thumbs-up"></i></div>`
-          html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180"></i></div>`
-          html += `<div class="div_num_votos"><div id="mensaje${id_mensaje}"></div></div>`
+          html += `<div class="div_like"><i class="fas fa-thumbs-up" onclick="fLike(${data.datos[i].men_id})"></i></div>`
+          html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180" onclick="fDislike(${data.datos[i].men_id})"></i></div>`
+          html += `<div class="div_num_votos"><div id="mensaje${id_mensaje}">0</div></div>`
           html += `</div>`
+          fCargarVotos(id_mensaje);
         }      
       }
       if(usuario_logeado== null){
@@ -329,6 +331,46 @@ function fMensajeTema(id_tema,tema) {
     })
 }
 
+function fLike(men_id){
+  
+    let URL = 'assets/php/servidor.php?peticion=like';
+    URL += "&men_id=" + men_id;
+  
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Like añadido: ",data)
+        
+    })
+      .finally( function(){
+      document.querySelector(".div_like").style.color="#27920c";  
+      fCancelar();
+      fCargarTemas();
+      fMensajeTema(id_tema,tema);
+      
+
+  })
+}
+function fDislike(men_id){
+
+  let URL = 'assets/php/servidor.php?peticion=dislike';
+  URL += "&men_id=" + men_id;
+
+  fetch(URL)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Dislike añadido: ",data)
+      
+  })
+    .finally( function(){
+    document.querySelector(".div_dislike").style.color="red";  
+    fCancelar();
+    fCargarTemas();
+    fMensajeTema(id_tema,tema);
+    
+
+})
+}
 function fCargarVotos(id_mensaje){
     // Pedir los temas a la base de datos
     const URL = 'assets/php/servidor.php?peticion=Cargar_Votos&id_mensaje='+id_mensaje;
@@ -336,13 +378,15 @@ function fCargarVotos(id_mensaje){
       .then((response) => response.json())
       .then((data) => {
         console.log("CargarVotos: ",data)
+        let html ="";
         if(data.datos.length == 0){
+          html = "0";
+          document.querySelector(`#mensaje${id_mensaje}`).innerHTML = html;
           console.log("Array vacio")
         }else{
-          let html ="";
         let positivos = data.datos[0].votos_positivos;
         let negativos = data.datos[0].votos_negativos;
-        let total = positivos - negativos;
+        let total = data.datos[0].total;
         html = total;
         document.querySelector(`#mensaje${id_mensaje}`).innerHTML = html;
         }

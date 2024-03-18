@@ -40,14 +40,44 @@ if (isset($_REQUEST['peticion'])) {
     
         case "Cargar_Votos":
             $id_mensaje = $_REQUEST['id_mensaje'];
-            $sql = "SELECT IFNULL(COUNT(voto_positivo), 0) as votos_positivos, IFNULL(COUNT(voto_negativo), 0) as votos_negativos  FROM votos
-            WHERE men_id = $id_mensaje
-            GROUP BY men_id";
+            $sql = "SELECT IFNULL(SUM(voto_positivo), 0) as votos_positivos, IFNULL(SUM(voto_negativo), 0) as votos_negativos,
+            IFNULL(SUM(voto_positivo), 0) - IFNULL(SUM(voto_negativo), 0) as total
+            FROM votos
+                        WHERE men_id = $id_mensaje
+                        GROUP BY men_id";
             $datos['sql']=$sql;
             $datos["datos"] = BBDD_CTRLR::Consultas($sql);
             echo json_encode($datos);      
             break; 
+
+        case "like":
+            $men_id = $_REQUEST['men_id'];
+            $sql = "INSERT INTO votos (voto_id, usu_id, men_id, voto_positivo, voto_negativo) VALUES 
+            (null, '12', $men_id , 1, 0)";
     
+            $datos['sql']=$sql;
+            // CUIDADO : Este servidor utiliza la función CRUD para hacer Insert, Update o Delete
+            // CRUD tiene 2 parámetros, el SQL y una letra que si es i devuelve el ID generado; 
+            //  si no es i devuelve el nº de registros procesados
+            $datos['datos'] = BBDD_CTRLR::CRUD($sql, '');
+            // Devuelvo a JS los datos codificados como JSON
+            echo json_encode($datos);  
+            break;
+
+        case "dislike":
+            $men_id = $_REQUEST['men_id'];
+            $sql = "INSERT INTO votos (voto_id, usu_id, men_id, voto_positivo, voto_negativo) VALUES 
+            (null, '12', $men_id , 0, 1)";
+    
+            $datos['sql']=$sql;
+            // CUIDADO : Este servidor utiliza la función CRUD para hacer Insert, Update o Delete
+            // CRUD tiene 2 parámetros, el SQL y una letra que si es i devuelve el ID generado; 
+            //  si no es i devuelve el nº de registros procesados
+            $datos['datos'] = BBDD_CTRLR::CRUD($sql, '');
+            // Devuelvo a JS los datos codificados como JSON
+            echo json_encode($datos);  
+            break;
+
 
         case "ControlLogin":
             // Recuperar parametros
