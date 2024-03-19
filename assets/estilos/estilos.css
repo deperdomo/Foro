@@ -164,6 +164,15 @@ header {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     border-radius: 50%;
 }
+#bienvenida{
+    font-family: Satoshi;
+    font-weight: 200;
+    position: absolute;
+    left: 100px;
+    top: 22px;
+    font-size: 18px;
+    display: none;
+}
 #login{
     text-align: center;
     font-size: 20px;
@@ -406,6 +415,7 @@ section>.gran_contenedor_mensaje {
     flex: 1;
     text-align: left;
     padding-left: 30px;
+    overflow-wrap: break-word;
 }
 
 .mensaje {

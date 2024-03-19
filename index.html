@@ -168,12 +168,31 @@
                 </tr>
             </table>
         </form>
+        <form id="advertencia_borrar_mensaje">
+            <table>
+                <th colspan="2">
+                    Advertencia:
+                </th>
+                <tr>
+                    <td colspan="2" id="td_nombreT">Está seguro de eliminar estetema, todos los mensajes en el tema se eliminaran.</td>
+                </tr>
+                <tr>
+                    <td colspan="1" class="button_salir" onclick="fCancelar('form_login')">
+                        Salir
+                    </td>
+                    <td colspan="1" class="button_enviar_mensaje" onclick="fEliminarUnMensaje(id_mensaje)">
+                        Confirmar
+                    </td>
+                </tr>
+            </table>
+        </form>
     </div>
 
     
     <div id="relleno"></div>
     <header>
         <div class="foto_usuario_logeado"></div>
+        <div id="bienvenida">esto es una bienvenida</div>
         <h1>Foro</h1>
         <button id="login" class="btn-hover color-7"  onclick="fLogin()">Inicia sesión</button>
        
