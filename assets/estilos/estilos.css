@@ -26,15 +26,18 @@
     align-items: center;
 }
 table{
-    border-spacing: 20px;
+    border-spacing: 25px;
 }
 #div_modal > form {
     background-color: #457b9d;
-    /* border: 1px solid black; */
+    /* border: 1px solid #1d3557; */
     border-radius: 5px;
     height: auto;
     padding: 10px;
-    box-shadow: 2px 2px 2px #444;
+    box-shadow: 3px 3px 7px #444;
+}
+#advertencia_borrar_mensaje> form> table{
+    width: 500px;
 }
 #div_modal > form tr > td{
     vertical-align: middle;
@@ -51,11 +54,11 @@ table{
     cursor: pointer;
     transition: border-color 0.5s, background-color 0.5s, color 0.5s;   
 }
-.button_salir:hover{
+.button_salir:hover,.button_confirmar_advertencia:hover{
     background-color: var(--color-f);
     color: rgb(232, 106, 106);
 }
-.button_registrar,.button_enviar_mensaje{
+.button_registrar,.button_enviar_mensaje,.button_confirmar_advertencia{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,7 +71,7 @@ table{
     cursor: pointer;
     transition: border-color 0.5s, background-color 0.5s, color 0.5s;  
 }  
-.button_registrar:hover,.button_enviar_mensaje:hover{
+.button_registrar:hover,.button_enviar_mensaje:hover,.button_salir_advertencia:hover{
     background-color: var(--color-f);
     color: rgb(147, 233, 98);
 }
@@ -89,7 +92,7 @@ table{
     background-color: var(--color-f);
     color: rgb(147, 233, 98);
 }
-.button_registrarx,.button_loginx{
+.button_registrarx,.button_loginx,.button_salir_advertencia{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,6 +105,14 @@ table{
     color: rgba(#fff, 0.8);
     cursor: pointer;
     transition: border-color 0.5s, background-color 0.5s, color 0.5s;  
+}
+.button_confirmar_advertencia{
+    margin-left: 10px;
+}
+#tr_problematico{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #div_error,#div_error_mensaje,#rdiv_error{
     font-family: Satoshi-Bold;
@@ -121,9 +132,19 @@ table{
 }
 .Titulo_de_Forms{
     font-size: 50px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 .Titulo_de_Forms_mensajes{
+    font-size: 35px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+#Titulo_form_añadir_temas{
     font-size: 25px;
+}
+.Titulo_de_Form_advertencia{
+    font-size: 35px;
+    color: #bc202f;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 textarea {
     height: 100px;
@@ -164,7 +185,7 @@ header {
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     border-radius: 50%;
 }
-#bienvenida{
+#bienvenida_usu{
     font-family: Satoshi;
     font-weight: 200;
     position: absolute;

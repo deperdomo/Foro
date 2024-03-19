@@ -151,9 +151,19 @@
         </form>
         <form id="form_añadir_tema">
             <table>
-                <th colspan="2">
+                <th colspan="2" id="Titulo_form_añadir_temas">
                     Escriba el nombre del nuevo tema
                 </th>
+                <tr>
+                    <td colspan="2">
+                        <div><hr color="black"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div>&nbsp;</div>
+                    </td>
+                </tr>
                 <tr>
                     <td id="td_nombreT">Nombre del tema:</td>
                     <td><input type="text" id="rnombreTema"></td></td>
@@ -170,17 +180,17 @@
         </form>
         <form id="advertencia_borrar_mensaje">
             <table>
-                <th colspan="2">
+                <th colspan="2" class="Titulo_de_Form_advertencia">
                     Advertencia:
                 </th>
                 <tr>
-                    <td colspan="2" id="td_nombreT">Está seguro de eliminar estetema, todos los mensajes en el tema se eliminaran.</td>
+                    <td colspan="2" id="td_nombreT">Está seguro de eliminar este tema, todos los mensajes en el tema se eliminaran.</td>
                 </tr>
-                <tr>
-                    <td colspan="1" class="button_salir" onclick="fCancelar('form_login')">
+                <tr id="tr_problematico">
+                    <td colspan="1" class="button_salir_advertencia" onclick="fCancelar('form_login')">
                         Salir
                     </td>
-                    <td colspan="1" class="button_enviar_mensaje" onclick="fEliminarUnMensaje(id_mensaje)">
+                    <td colspan="1" class="button_confirmar_advertencia" onclick="fEliminarUnTema(id_tema_actual)">
                         Confirmar
                     </td>
                 </tr>
@@ -192,7 +202,7 @@
     <div id="relleno"></div>
     <header>
         <div class="foto_usuario_logeado"></div>
-        <div id="bienvenida">esto es una bienvenida</div>
+        <div id="bienvenida_usu">esto es una bienvenida</div>
         <h1>Foro</h1>
         <button id="login" class="btn-hover color-7"  onclick="fLogin()">Inicia sesión</button>
        

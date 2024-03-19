@@ -18,7 +18,7 @@ function fNuevoTema(){
 function fCerrarEvento(){
   fMostrar("form_login"); 
 }
-function fAdvertenciaBorrarMensaje(id_tema){
+function fAdvertenciaBorrarMensaje(){
     fMostrar("advertencia_borrar_mensaje")
     
 }
@@ -76,8 +76,8 @@ function fControlLogin(){
           usuario_logeado = data.datos[0];
           
           document.querySelector(".foto_usuario_logeado").innerHTML =`<img src="assets/fotos/${usuario_logeado.usu_foto}" title="${usuario_logeado.usu_alias}">`;
-          document.querySelector("#bienvenida").innerHTML =`Bienvenido ${usuario_logeado.usu_alias}`;
-          document.querySelector("#bienvenida").style.display = "block"; 
+          document.querySelector("#bienvenida_usu").innerHTML =`Bienvenido ${usuario_logeado.usu_alias}`;
+          document.querySelector("#bienvenida_usu").style.display = "flex"; 
           console.log("usuario logeado: ",usuario_logeado)
           //  El login es correcto
           document.querySelector("#div_modal").style.display = "none"; 
@@ -235,7 +235,7 @@ function fCargarTemas() {
       } 
       if(usuario_logeado!= null && usuario_logeado.usu_admin==1){
         // Si se logea un administrador  
-        html += `<div class="contenedor_temas" onclick="fMensajeTema(${id_tema},'${tema}')"><div class="tema">${tema}</div><div class="contador">(${cont})</div><div class="menos" title="Eliminar tema"><i class="fas fa-trash" onclick="fAdvertenciaBorrarMensaje(${id_tema})"></i></div></div>`;
+        html += `<div class="contenedor_temas" onclick="fMensajeTema(${id_tema},'${tema}')"><div class="tema">${tema}</div><div class="contador">(${cont})</div><div class="menos" title="Eliminar tema"><i class="fas fa-trash" onclick="fAdvertenciaBorrarMensaje()"></i></div></div>`;
       }
       if(usuario_logeado!= null && usuario_logeado.usu_admin==0){
         // Si se logea un usuario normal
@@ -423,9 +423,9 @@ fetch(URL)
 })
 }
 
-function fEliminarUnTema(id_tema){
+function fEliminarUnTema(id_tema_actual){
   // Pedir los temas a la base de datos
-const URL = 'assets/php/servidor.php?peticion=eliminar_un_tema&id_tema=' + id_tema;
+const URL = 'assets/php/servidor.php?peticion=eliminar_un_tema&id_tema=' + id_tema_actual;
 fetch(URL)
   .then((response) => response.json())
   .then((data) => {
@@ -435,7 +435,7 @@ fetch(URL)
     // document.querySelector("nav").innerHTML = html;
   })
   .finally( function(){
-    // fCancelar();
+    fCancelar();
     fCargarTemas();
     fMensajeTema(id_tema,tema);
 
