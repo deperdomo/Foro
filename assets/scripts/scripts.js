@@ -395,11 +395,18 @@ function fCargarVotos(id_mensaje){
           document.querySelector(`#mensaje${id_mensaje}`).innerHTML = html;
           console.log("Array vacio")
         }else{
-        let positivos = data.datos[0].votos_positivos;
-        let negativos = data.datos[0].votos_negativos;
         let total = data.datos[0].total;
         html = total;
-        document.querySelector(`#mensaje${id_mensaje}`).innerHTML = html;
+        if(data.datos[0].total>0){
+          document.querySelector(`#mensaje${id_mensaje}`).style.color = "green";
+          document.querySelector(`#mensaje${id_mensaje}`).style.textShadow = "1px 1px 2px rgba(11, 238, 30, 0.504)";
+          document.querySelector(`#mensaje${id_mensaje}`).innerHTML = html;
+        }else{
+          document.querySelector(`#mensaje${id_mensaje}`).style.color = "red";
+          document.querySelector(`#mensaje${id_mensaje}`).style.textShadow = "1px 1px 2px rgba(233, 8, 8, 0.504)";
+          document.querySelector(`#mensaje${id_mensaje}`).innerHTML = html;
+        }
+        
         }
         
       })
