@@ -76,7 +76,7 @@ function fControlLogin(){
           usuario_logeado = data.datos[0];
           
           document.querySelector(".foto_usuario_logeado").innerHTML =`<img src="assets/fotos/${usuario_logeado.usu_foto}" title="${usuario_logeado.usu_alias}">`;
-          document.querySelector("#bienvenida_usu").innerHTML =`Bienvenido ${usuario_logeado.usu_alias}`;
+          document.querySelector("#bienvenida_usu").innerHTML =`¡Bienvenido, ${usuario_logeado.usu_alias}!`;
           document.querySelector("#bienvenida_usu").style.display = "flex"; 
           console.log("usuario logeado: ",usuario_logeado)
           //  El login es correcto
@@ -264,8 +264,8 @@ function fMensajeTema(id_tema,tema) {
       
 
       //                ---------- DIVS DE LOS MENSAJES ----------
-      if(usuario_logeado!= null && usuario_logeado.usu_admin==0 ){
-        // Si se logea un usuario  
+      if(usuario_logeado!= null && (usuario_logeado.usu_admin==0 ||usuario_logeado.usu_admin==1 )){
+        // Si se logea un usuario o un Administrador  
         for (i = 0; i < data.datos.length; i++) {
           let foto = data.datos[i].foto;
           let mensaje = data.datos[i].men_mensaje;
@@ -279,62 +279,45 @@ function fMensajeTema(id_tema,tema) {
           html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`
           html += `<div class="mensaje">${mensaje}</div>`
           html += `<div class="fecha_hora">${fecha_hora}</div>`
-          if(men_usu_id == usuario_logeado.usu_id){
+          if(men_usu_id == usuario_logeado.usu_id || usuario_logeado.usu_admin==1){
               html += `<div class="text_eliminar_mensaje" title="Eliminar" onclick="fEliminarUnMensaje(${data.datos[i].men_id})">x</div>`
           }
+          html += `<div class="Cont_votos">`
           html += `<div class="div_like"><i class="fas fa-thumbs-up" onclick="fLike(${data.datos[i].men_id})"></i></div>`
+          html += `<div class="div_num_votos_positivos"><div id="mensaje_positivo${id_mensaje}">0</div></div>`
           html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180" onclick="fDislike(${data.datos[i].men_id})"></i></div>`
-          html += `<div class="div_num_votos"><div id="mensaje${id_mensaje}">0</div></div>`
+          html += `<div class="div_num_votos_negativos"><div id="mensaje_negativo${id_mensaje}">0</div></div>`
+          html += `</div>`
+
           html += `</div>`
           fCargarVotos(id_mensaje);
       }
-      
-
-    }
-      if(usuario_logeado!= null && usuario_logeado.usu_admin==1 ){ 
-        // Si se logea un administrador  
+    }else{
+       // usuario no Logeado
         for (i = 0; i < data.datos.length; i++) {
           let foto = data.datos[i].foto;
           let mensaje = data.datos[i].men_mensaje;
           let fecha_hora = data.datos[i].men_fecha_hora;
           let nombre = data.datos[i].usu_nombre;
           id_tema = data.datos[i].men_tema_id; 
-          
-          let id_mensaje = data.datos[i].men_id; 
 
-          html += `<div class="gran_contenedor_mensaje">`;
-          html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`;
-          html += `<div class="mensaje">${mensaje}</div>`;
-          html += `<div class="fecha_hora">${fecha_hora}</div>`;
-          html += `<div class="text_eliminar_mensaje" title="Eliminar" onclick="fEliminarUnMensaje(${data.datos[i].men_id})">x</div>`;
-          html += `<div class="div_like"><i class="fas fa-thumbs-up" onclick="fLike(${data.datos[i].men_id})"></i></div>`;
-          html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180" onclick="fDislike(${data.datos[i].men_id})"></i></div>`;
-          html += `<div class="div_num_votos"><div id="mensaje${id_mensaje}">0</div></div>`;
-          html += `</div>`;
-          fCargarVotos(id_mensaje);
-        }      
-      }
-      if(usuario_logeado== null){
-        for (i = 0; i < data.datos.length; i++) {
-        let foto = data.datos[i].foto;
-        let mensaje = data.datos[i].men_mensaje;
-        let fecha_hora = data.datos[i].men_fecha_hora;
-        let nombre = data.datos[i].usu_nombre;
-        id_tema = data.datos[i].men_tema_id; 
+          let id_mensaje = data.datos[i].men_id;     
 
-        let id_mensaje = data.datos[i].men_id;     
+          html += `<div class="gran_contenedor_mensaje">`
+          html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`
+          html += `<div class="mensaje">${mensaje}</div>`
+          html += `<div class="fecha_hora">${fecha_hora}</div>`
 
-        html += `<div class="gran_contenedor_mensaje">`
-        html += `<div class="cont_foto"><img src="assets/fotos/${foto}" class="foto_usuario" title="${nombre}"></div>`
-        html += `<div class="mensaje">${mensaje}</div>`
-        html += `<div class="fecha_hora">${fecha_hora}</div>`
-        html += `<div class="div_like"><i class="fas fa-thumbs-up"></i></div>`
-        html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180"></i></div>`
-        html += `<div class="div_num_votos"><div id="mensaje${id_mensaje}"></div></div>`
+          html += `<div class="Cont_votos">`
+          html += `<div class="div_like"><i class="fas fa-thumbs-up" onclick="fLogin()"></i></div>`
+          html += `<div class="div_num_votos_positivos"><div id="mensaje_positivo${id_mensaje}">0</div></div>`
+          html += `<div class="div_dislike"><i class="fas fa-thumbs-up fa-rotate-180" onclick="fLogin()"></i></div>`
+          html += `<div class="div_num_votos_negativos"><div id="mensaje_negativo${id_mensaje}">0</div></div>`
+          html += `</div>`
         
-        html += `</div>`
+          html += `</div>`
         fCargarVotos(id_mensaje);
-      }
+        }
       }
       
       console.log("ID del tema actual: ",id_tema_actual)
@@ -343,44 +326,35 @@ function fMensajeTema(id_tema,tema) {
 }
 
 function fLike(men_id){
-  
+    let usu_id = usuario_logeado.usu_id;
+    
     let URL = 'assets/php/servidor.php?peticion=like';
     URL += "&men_id=" + men_id;
+    URL += "&usu_id=" + usu_id;
   
     fetch(URL)
       .then((response) => response.json())
       .then((data) => {
         console.log("Like añadido: ",data)
-        
+        fCargarTemas();
+        fMensajeTema(id_tema,tema);
     })
-      .finally( function(){
-      document.querySelector(".div_like").style.color="#27920c";  
-      fCancelar();
-      fCargarTemas();
-      fMensajeTema(id_tema,tema);
-      
-
-  })
+  
 }
 function fDislike(men_id){
+  let usu_id = usuario_logeado.usu_id;
 
   let URL = 'assets/php/servidor.php?peticion=dislike';
   URL += "&men_id=" + men_id;
+  URL += "&usu_id=" + usu_id;
 
   fetch(URL)
     .then((response) => response.json())
     .then((data) => {
       console.log("Dislike añadido: ",data)
-      
+      fCargarTemas();
+      fMensajeTema(id_tema,tema);
   })
-    .finally( function(){
-    document.querySelector(".div_dislike").style.color="red";  
-    fCancelar();
-    fCargarTemas();
-    fMensajeTema(id_tema,tema);
-    
-
-})
 }
 function fCargarVotos(id_mensaje){
     // Pedir los temas a la base de datos
@@ -389,26 +363,17 @@ function fCargarVotos(id_mensaje){
       .then((response) => response.json())
       .then((data) => {
         console.log("CargarVotos: ",data)
-        let html ="";
-        if(data.datos.length == 0){
-          html = "0";
-          document.querySelector(`#mensaje${id_mensaje}`).innerHTML = html;
-          console.log("Array vacio")
-        }else{
-        let total = data.datos[0].total;
-        html = total;
-        if(data.datos[0].total>0){
-          document.querySelector(`#mensaje${id_mensaje}`).style.color = "green";
-          document.querySelector(`#mensaje${id_mensaje}`).style.textShadow = "1px 1px 2px rgba(11, 238, 30, 0.504)";
-          document.querySelector(`#mensaje${id_mensaje}`).innerHTML = html;
-        }else{
-          document.querySelector(`#mensaje${id_mensaje}`).style.color = "red";
-          document.querySelector(`#mensaje${id_mensaje}`).style.textShadow = "1px 1px 2px rgba(233, 8, 8, 0.504)";
-          document.querySelector(`#mensaje${id_mensaje}`).innerHTML = html;
+        let html_positivo ="0";
+        let html_negativo ="0";
+        if(data.datos.length != 0){
+          html_positivo = data.datos[0].likes;
+          html_negativo = data.datos[0].dislikes;
+
+          document.querySelector(`#mensaje_positivo${id_mensaje}`).innerHTML = html_positivo;
+          document.querySelector(`#mensaje_negativo${id_mensaje}`).innerHTML = html_negativo;
+
         }
-        
-        }
-        
+
       })
 }
 function fEliminarUnMensaje(id_mensaje){

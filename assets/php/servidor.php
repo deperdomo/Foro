@@ -40,20 +40,27 @@ if (isset($_REQUEST['peticion'])) {
     
         case "Cargar_Votos":
             $id_mensaje = $_REQUEST['id_mensaje'];
-            $sql = "SELECT IFNULL(SUM(voto_positivo), 0) as votos_positivos, IFNULL(SUM(voto_negativo), 0) as votos_negativos,
-            IFNULL(SUM(voto_positivo), 0) - IFNULL(SUM(voto_negativo), 0) as total
-            FROM votos
-                        WHERE men_id = $id_mensaje
-                        GROUP BY men_id";
+            $sql = "SELECT 
+            men_id,
+            SUM(CASE WHEN tipo = 'like' THEN 1 ELSE 0 END) AS likes,
+            SUM(CASE WHEN tipo = 'dislike' THEN 1 ELSE 0 END) AS dislikes
+        FROM 
+            interacciones
+        WHERE 
+            men_id = $id_mensaje
+        GROUP BY 
+            men_id";
             $datos['sql']=$sql;
             $datos["datos"] = BBDD_CTRLR::Consultas($sql);
             echo json_encode($datos);      
             break; 
 
+
         case "like":
             $men_id = $_REQUEST['men_id'];
-            $sql = "INSERT INTO votos (voto_id, usu_id, men_id, voto_positivo, voto_negativo) VALUES 
-            (null, '12', $men_id , 1, 0)";
+            $usu_id = $_REQUEST['usu_id'];
+            $sql = "INSERT INTO interacciones (interaccion_id, usu_id, men_id, tipo, Timestamp) VALUES 
+                                                (null, $usu_id, $men_id, 'like', null);";
     
             $datos['sql']=$sql;
             // CUIDADO : Este servidor utiliza la función CRUD para hacer Insert, Update o Delete
@@ -66,9 +73,10 @@ if (isset($_REQUEST['peticion'])) {
 
         case "dislike":
             $men_id = $_REQUEST['men_id'];
-            $sql = "INSERT INTO votos (voto_id, usu_id, men_id, voto_positivo, voto_negativo) VALUES 
-            (null, '12', $men_id , 0, 1)";
-    
+            $usu_id = $_REQUEST['usu_id'];
+            $sql = "INSERT INTO interacciones (interaccion_id, usu_id, men_id, tipo, Timestamp) VALUES 
+            (null, $usu_id, $men_id, 'dislike', null);";
+
             $datos['sql']=$sql;
             // CUIDADO : Este servidor utiliza la función CRUD para hacer Insert, Update o Delete
             // CRUD tiene 2 parámetros, el SQL y una letra que si es i devuelve el ID generado; 

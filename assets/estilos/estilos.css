@@ -161,7 +161,7 @@ body {
     height: 100vh;
     display: grid;
     grid-template-columns: 230px 1fr;
-    grid-template-rows: 70px 1fr 50px;
+    grid-template-rows: 90px 1fr 50px;
     grid-template-areas: "zh  zh" "zn  zs" "zf  zf";
 }
 
@@ -181,7 +181,7 @@ header {
     width: 55px;
     position: absolute;
     left: 20px;
-    top: 8px;
+    top: 18px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     border-radius: 50%;
 }
@@ -190,7 +190,7 @@ header {
     font-weight: 200;
     position: absolute;
     left: 100px;
-    top: 22px;
+    top: 32px;
     font-size: 18px;
     display: none;
 }
@@ -198,7 +198,7 @@ header {
     text-align: center;
     font-size: 20px;
     position: absolute;
-    top:9px;
+    top:18px;
     right: 20px;
     height: 55px;
     width: 130px;
@@ -225,6 +225,7 @@ header {
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out;
     color: var(--color-t);
+    
 }
 
 .btn-hover:focus {
@@ -459,16 +460,24 @@ section>.gran_contenedor_mensaje {
 
 }
 /* ----------- VOTOS -----------*/
-.div_num_votos{
+.Cont_votos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    right: 10px;
+    top: 60px;
+    width: 70px;
+    height: 20px;
+    background-color: var(--color-t);
+}
+.div_num_votos_positivos,.div_num_votos_negativos{
     font-family: Satoshi-Bold;
     font-size: 17px;
     background-color: var(--color-t);
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    right: 10px;
-    top: 60px;
     height: 15px;
     width: 20px;
 }
@@ -479,9 +488,6 @@ section>.gran_contenedor_mensaje {
         1px 1px 0 #1b8902, 
         -1px -1px 0 #1b8902, 
         -1px  1px 0 #1b8902; 
-    position: relative;
-    right: 15px;
-    top: 60px;
     height: 17px;
     width: 20px;
     transition: padding-bottom 0.3s,color 0.5s;
@@ -500,9 +506,6 @@ section>.gran_contenedor_mensaje {
         1px 1px 0 #fa2307, 
         -1px -1px 0 #fa2307, 
         -1px  1px 0 #fa2307;
-    position: relative;
-    right: 20px;
-    top: 60px;
     height: 17px;
     width: 20px;
     padding-left: 8px;

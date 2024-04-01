@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-03-2024 a las 23:10:46
+-- Tiempo de generación: 01-04-2024 a las 20:31:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,6 +20,39 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `bd_foro`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `interacciones`
+--
+
+CREATE TABLE `interacciones` (
+  `interaccion_id` int(11) NOT NULL,
+  `usu_id` int(11) DEFAULT NULL,
+  `men_id` int(11) DEFAULT NULL,
+  `tipo` enum('like','dislike') DEFAULT NULL,
+  `Timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `interacciones`
+--
+
+INSERT INTO `interacciones` (`interaccion_id`, `usu_id`, `men_id`, `tipo`, `Timestamp`) VALUES
+(4, 1, 53, 'like', '2024-03-27 09:15:00'),
+(17, 3, 53, 'like', '2024-03-27 09:15:00'),
+(20, 1, 52, 'like', '2024-03-27 09:15:00'),
+(21, 1, 41, 'like', '2024-03-27 09:15:00'),
+(22, 1, 42, 'like', '2024-03-27 09:15:00'),
+(24, 1, 46, 'like', '2024-03-27 09:15:00'),
+(30, 12, 52, 'dislike', '2024-03-27 14:13:38'),
+(32, 12, 52, 'like', '2024-03-27 14:13:42'),
+(33, 12, 53, 'like', '2024-03-27 14:13:49'),
+(34, 12, 53, 'dislike', '2024-03-27 14:13:53'),
+(37, 1, 46, 'dislike', '2024-03-27 23:46:38'),
+(78, 1, 52, 'dislike', '2024-04-01 18:28:44'),
+(85, 1, 53, 'dislike', '2024-04-01 18:28:51');
 
 -- --------------------------------------------------------
 
@@ -48,7 +81,6 @@ INSERT INTO `mensajes` (`men_id`, `men_mensaje`, `men_tema_id`, `men_usu_id`, `m
 (46, '¡Buen día, comunidad! Tengo una consulta sobre formularios HTML. Estoy intentando crear un formulario con campos de entrada y botones, pero estoy teniendo problemas para alinear los elementos correctamente. ¿Alguien tiene sugerencias sobre cómo diseñar formularios HTML de manera efectiva?', 28, 2, '2024-03-19 20:04:42'),
 (47, 'Hola, manejar excepciones en Java es crucial para escribir código robusto. Para excepciones específicas, es mejor atraparlas individualmente y manejarlas de manera adecuada según el contexto. Para excepciones genéricas, como Exception, es posible manejarlas en un bloque catch final para capturar cualquier excepción que no haya sido manejada específicamente. Recuerda siempre seguir el principio de manejo de excepciones adecuado para mantener tu código limpio y fácil de mantener.', 26, 1, '2024-03-19 20:06:09'),
 (50, '¡Hola! Para diseñar formularios HTML de manera efectiva, te recomendaría usar un diseño basado en rejillas (grid) o flexbox para una mayor flexibilidad en el posicionamiento de los elementos. Además, asegúrate de utilizar etiquetas semánticas HTML como form, input, label, etc., para una mejor accesibilidad y SEO. Si puedes compartir tu código HTML actual, estaré encantado de ayudarte a resolver los problemas de alineación que estás experimentando.', 28, 1, '2024-03-19 20:10:29'),
-(51, '¡Hola a todos! Estoy aprendiendo JavaScript y me encuentro con un desafío relacionado con los eventos del DOM. Quiero realizar ciertas acciones cuando se hace clic en un elemento de mi página, pero no estoy seguro de cómo implementarlo correctamente. ¿Alguien puede orientarme sobre cómo manejar eventos en JavaScript de manera adecuada?', 29, 1, '2024-03-19 20:11:22'),
 (52, 'Respuesta: \"¡Hola! Para manejar eventos en JavaScript, primero necesitas seleccionar el elemento al que deseas agregar el evento utilizando document.querySelector o métodos similares. Luego, puedes agregar un \"escuchador\" de eventos utilizando addEventListener. ', 29, 14, '2024-03-19 20:13:12'),
 (53, 'Mala respuesta para ponerle dislikes', 29, 3, '2024-03-19 20:51:46'),
 (54, 'Comprobando el cambio de color del contador de Dislikes', 2, 3, '2024-03-19 21:04:20');
@@ -104,67 +136,17 @@ INSERT INTO `usuarios` (`usu_id`, `usu_nombre`, `usu_alias`, `usu_password`, `us
 (13, 'Manuel', 'Manuel', '96917805fd060e3766a9a1b834639d35', 'u04.gif', 0),
 (14, 'Deivi', 'Deivi', 'cfa0a58fb84cb2a83767c24c0d617a0f', 'u16.gif', 0);
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `votos`
---
-
-CREATE TABLE `votos` (
-  `voto_id` int(11) NOT NULL,
-  `usu_id` int(11) NOT NULL,
-  `men_id` int(11) NOT NULL,
-  `voto_positivo` tinyint(1) DEFAULT NULL,
-  `voto_negativo` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `votos`
---
-
-INSERT INTO `votos` (`voto_id`, `usu_id`, `men_id`, `voto_positivo`, `voto_negativo`) VALUES
-(105, 12, 51, 1, 0),
-(106, 12, 51, 1, 0),
-(107, 12, 51, 1, 0),
-(108, 12, 53, 0, 1),
-(109, 12, 51, 1, 0),
-(110, 12, 53, 0, 1),
-(111, 12, 51, 1, 0),
-(112, 12, 52, 1, 0),
-(113, 12, 52, 1, 0),
-(114, 12, 53, 0, 1),
-(115, 12, 53, 0, 1),
-(116, 12, 44, 1, 0),
-(117, 12, 44, 1, 0),
-(118, 12, 42, 1, 0),
-(119, 12, 42, 1, 0),
-(120, 12, 50, 1, 0),
-(121, 12, 50, 1, 0),
-(122, 12, 50, 1, 0),
-(123, 12, 52, 1, 0),
-(124, 12, 46, 1, 0),
-(125, 12, 46, 1, 0),
-(126, 12, 41, 1, 0),
-(127, 12, 41, 1, 0),
-(128, 12, 45, 1, 0),
-(129, 12, 45, 1, 0),
-(130, 12, 51, 1, 0),
-(131, 12, 51, 0, 1),
-(132, 12, 51, 1, 0),
-(133, 12, 53, 0, 1),
-(134, 12, 51, 1, 0),
-(135, 12, 43, 1, 0),
-(136, 12, 43, 1, 0),
-(137, 12, 54, 0, 1),
-(138, 12, 54, 0, 1),
-(139, 12, 52, 0, 1),
-(140, 12, 52, 0, 1),
-(141, 12, 52, 0, 1),
-(142, 12, 52, 1, 0);
-
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `interacciones`
+--
+ALTER TABLE `interacciones`
+  ADD PRIMARY KEY (`interaccion_id`),
+  ADD UNIQUE KEY `UniqueInteraction` (`usu_id`,`men_id`,`tipo`),
+  ADD KEY `fk_mensaje_interaccion` (`men_id`);
 
 --
 -- Indices de la tabla `mensajes`
@@ -188,28 +170,26 @@ ALTER TABLE `usuarios`
   ADD UNIQUE KEY `usu_alias` (`usu_alias`);
 
 --
--- Indices de la tabla `votos`
---
-ALTER TABLE `votos`
-  ADD PRIMARY KEY (`voto_id`),
-  ADD KEY `usu_id` (`usu_id`),
-  ADD KEY `men_id` (`men_id`);
-
---
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `interacciones`
+--
+ALTER TABLE `interacciones`
+  MODIFY `interaccion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `men_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `men_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT de la tabla `temas`
 --
 ALTER TABLE `temas`
-  MODIFY `tema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `tema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -218,14 +198,16 @@ ALTER TABLE `usuarios`
   MODIFY `usu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT de la tabla `votos`
---
-ALTER TABLE `votos`
-  MODIFY `voto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
-
---
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `interacciones`
+--
+ALTER TABLE `interacciones`
+  ADD CONSTRAINT `fk_mensaje_interaccion` FOREIGN KEY (`men_id`) REFERENCES `mensajes` (`men_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `interacciones_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `usuarios` (`usu_id`),
+  ADD CONSTRAINT `interacciones_ibfk_2` FOREIGN KEY (`men_id`) REFERENCES `mensajes` (`men_id`);
 
 --
 -- Filtros para la tabla `mensajes`
@@ -234,13 +216,6 @@ ALTER TABLE `mensajes`
   ADD CONSTRAINT `fk_tema_mensajes` FOREIGN KEY (`men_tema_id`) REFERENCES `temas` (`tema_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `mensajes_ibfk_1` FOREIGN KEY (`men_usu_id`) REFERENCES `usuarios` (`usu_id`),
   ADD CONSTRAINT `mensajes_ibfk_2` FOREIGN KEY (`men_tema_id`) REFERENCES `temas` (`tema_id`);
-
---
--- Filtros para la tabla `votos`
---
-ALTER TABLE `votos`
-  ADD CONSTRAINT `votos_ibfk_1` FOREIGN KEY (`usu_id`) REFERENCES `usuarios` (`usu_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `votos_ibfk_2` FOREIGN KEY (`men_id`) REFERENCES `mensajes` (`men_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
