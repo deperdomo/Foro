@@ -28,6 +28,11 @@
 table{
     border-spacing: 25px;
 }
+#form_registro{
+    width: 0 auto;
+    
+    
+}
 #div_modal > form {
     background-color: #457b9d;
     /* border: 1px solid #1d3557; */
@@ -87,6 +92,9 @@ table{
     color: rgba(#fff, 0.8);
     cursor: pointer;
     transition: border-color 0.5s, background-color 0.5s, color 0.5s;  
+}
+.button_registrarx,.button_loginx{
+    margin: 25px 0 5px 0;
 }  
 .button_login:hover,.button_registrarx:hover,.button_loginx:hover{
     background-color: var(--color-f);
@@ -152,6 +160,14 @@ textarea {
 }
 .campo_imput{
     text-align: right;
+    font-size: 19px;
+}
+.imput{
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 6px;
 }
 .td_login{
     text-align: right;
@@ -239,6 +255,8 @@ header {
 
 header>h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    font-size: 50px;
 }
 
 nav {
@@ -466,7 +484,7 @@ section>.gran_contenedor_mensaje {
     justify-content: center;
     position: relative;
     right: 10px;
-    top: 60px;
+    top: 55px;
     width: 70px;
     height: 20px;
     background-color: var(--color-t);
@@ -512,6 +530,7 @@ section>.gran_contenedor_mensaje {
     transition: padding-top 0.3s,color 0.5s;
     cursor: pointer;
     z-index: 1;
+    margin-right: 5px;
 }
 .div_dislike:hover{
     color:  #fa2307;
